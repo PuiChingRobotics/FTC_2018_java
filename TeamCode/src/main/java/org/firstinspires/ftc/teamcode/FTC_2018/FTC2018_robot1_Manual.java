@@ -66,10 +66,14 @@ public class FTC2018_robot1_Manual extends OpMode{
         telemetry.addData("Running", "Robot 1");
         //player1
         //drive
-        Lfronttmp = leftStickX*0.35+leftStickY*0.35+rightStickX*0.3;
+        Lfronttmp = Lfronttmp*speed_old+(leftStickX*0.35+leftStickY*0.35+rightStickX*0.3)*speed_new;
+        Rfronttmp = Rfronttmp*speed_old+(-leftStickX*0.35+leftStickY*0.35-rightStickX*0.3)*speed_new;
+        Lbacktmp = Lbacktmp*speed_old+(-leftStickX*0.35+leftStickY*0.35+rightStickX*0.3)*speed_new;
+        Rbacktmp = Rbacktmp*speed_old+(leftStickX*0.35+leftStickY*0.35-rightStickX*0.3)*speed_new;
+        /*Lfronttmp = leftStickX*0.35+leftStickY*0.35+rightStickX*0.3;
         Rfronttmp = -leftStickX*0.35+leftStickY*0.35-rightStickX*0.3;
         Lbacktmp = -leftStickX*0.35+leftStickY*0.35+rightStickX*0.3;
-        Rbacktmp = leftStickX*0.35+leftStickY*0.35-rightStickX*0.3;
+        Rbacktmp = leftStickX*0.35+leftStickY*0.35-rightStickX*0.3;*/
         robot.Lfront.setPower(Lfronttmp);
         robot.Lback.setPower(Lbacktmp);
         robot.Rfront.setPower(Rfronttmp);
