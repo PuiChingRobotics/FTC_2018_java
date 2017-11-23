@@ -63,7 +63,6 @@ public class FTC2018_robot1_Manual extends OpMode{
         double speed_new = 0.2;
         double speed_old = 0.8;
 
-        telemetry.addData("Test",1);
         telemetry.addData("Running", "Robot 1");
         //player1
         //drive
