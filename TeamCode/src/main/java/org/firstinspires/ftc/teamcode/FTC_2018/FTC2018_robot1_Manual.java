@@ -19,16 +19,16 @@ public class FTC2018_robot1_Manual extends OpMode{
         robot.Rback.setPower(0);
         robot.rope.setPower(0);
         robot.lifting.setPower(0);
-        robot.clipL0.setPosition(0.6);
-        robot.clipR0.setPosition(0.4);
+//         robot.clipL0.setPosition(0.6);
+//         robot.clipR0.setPosition(0.4);
         robot.clipL1.setPosition(0.2);
         robot.clipR1.setPosition(0.8);
         robot.clipM1.setPower(0);
         robot.clipM2.setPower(0);
-        //robot.clipF1.setPosition(0);
-        //robot.clipF2.setPosition(robot.clipStop);
-        //robot.clipBL.setPosition(robot.clipBLopen);
-        //robot.clipBR.setPosition(robot.clipBRopen);
+//         robot.clipF1.setPosition(0);
+//         robot.clipF2.setPosition(robot.clipStop);
+//         robot.clipBL.setPosition(robot.clipBLopen);
+//         robot.clipBR.setPosition(robot.clipBRopen);
         robot.clipM2.setDirection(DcMotorSimple.Direction.REVERSE);
         robot.Rfront.setDirection(DcMotorSimple.Direction.REVERSE);
         robot.Rback.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -88,34 +88,28 @@ public class FTC2018_robot1_Manual extends OpMode{
             robot.clipBL.setPosition(robot.clipBLclose);
             robot.clipBR.setPosition(robot.clipBRclose);
         }
-        else if (gamepad1.start) {//fully open
+        else if (gamepad1.b) {//fully open
             robot.clipBL.setPosition(robot.clipBLfullopen);
             robot.clipBR.setPosition(robot.clipBRfullopen);
         }
 
-        //robot.lifting.setPower(rightStickY);
         if (gamepad1.dpad_left == true) robot.lifting.setPower(0.3);
         else if (gamepad1.dpad_right == true) robot.lifting.setPower(-0.3);
         else robot.lifting.setPower(0);
 
+        //rope
         if (gamepad1.left_trigger != 0) robot.rope.setPower(1);
         else if (gamepad1.right_trigger != 0) robot.rope.setPower(-1);
         else robot.rope.setPower(0);
-
-        telemetry.addData("gamepad1: ",!gamepad1.atRest());
-
-        //rope
+        
         /*if (gamepad1.dpad_up) robot.clipF2.setPosition(robot.clipUp);
         else if (gamepad1.dpad_down) robot.clipF2.setPosition(robot.clipDown);
         else robot.clipF2.setPosition(robot.clipStop);/*
 
-        if (gamepad1.left_trigger != 0) robot.rope.setPower(1);
-        else if (gamepad1.right_trigger != 0) robot.rope.setPower(-1);
-        else robot.rope.setPower(0);
-
         /*if (gamepad1.left_bumper) robot.clipF1.setPosition(1);
         else if (gamepad1.right_bumper) robot.clipF1.setPosition(0);*/
-
+        telemetry.addData("gamepad1: ",!gamepad1.atRest());
+        
         //player2
         //clip
         if (gamepad2.left_trigger != 0) robot.clipM1.setPower(0.2);
@@ -124,14 +118,14 @@ public class FTC2018_robot1_Manual extends OpMode{
         robot.clipM1.setPower(0.5*g2leftStickY);
         robot.clipM2.setPower(0.5*g2rightStickY);
 
-        if (gamepad2.a) {//close
+        /*if (gamepad2.a) {//close
             robot.clipL0.setPosition(robot.clipL0close);
             robot.clipR0.setPosition(robot.clipR0close);
         }
         if (gamepad2.b) {//open
             robot.clipL0.setPosition(robot.clipL0open);
             robot.clipR0.setPosition(robot.clipR0open);
-        }
+        }*/
         if (gamepad2.x) {//open
             robot.clipL1.setPosition(robot.clipL1open);
             robot.clipR1.setPosition(robot.clipR1open);
