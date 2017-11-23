@@ -70,10 +70,10 @@ public class FTC2018_robot1_Manual extends OpMode{
         Rfronttmp = -leftStickX*0.35+leftStickY*0.35-rightStickX*0.3;
         Lbacktmp = -leftStickX*0.35+leftStickY*0.35+rightStickX*0.3;
         Rbacktmp = leftStickX*0.35+leftStickY*0.35-rightStickX*0.3;
-        /*robot.Lfront.setPower(Lfronttmp);
+        robot.Lfront.setPower(Lfronttmp);
         robot.Lback.setPower(Lbacktmp);
         robot.Rfront.setPower(Rfronttmp);
-        robot.Rback.setPower(Rbacktmp);*/
+        robot.Rback.setPower(Rbacktmp);
 
         //Relic
         if (gamepad1.x) {//open
@@ -98,7 +98,7 @@ public class FTC2018_robot1_Manual extends OpMode{
         else if (gamepad1.right_trigger != 0) robot.rope.setPower(-1);
         else robot.rope.setPower(0);
 
-        telemetry.addData("gamepad1: ",true);
+        telemetry.addData("gamepad1: ",!gamepad1.atRest());
 
         //rope
         /*if (gamepad1.dpad_up) robot.clipF2.setPosition(robot.clipUp);
@@ -138,7 +138,7 @@ public class FTC2018_robot1_Manual extends OpMode{
         }
 
         telemetry.addData("Rope: ",robot.rope.getPower());
-        telemetry.addData("gamepad2: ",true);
+        telemetry.addData("gamepad2: ",!gamepad2.atRest());
         telemetry.update();
     }
 

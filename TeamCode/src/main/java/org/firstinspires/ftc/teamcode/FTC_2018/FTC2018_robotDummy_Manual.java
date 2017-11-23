@@ -16,8 +16,8 @@ public class FTC2018_robotDummy_Manual extends OpMode{
         robot.Rfront.setPower(0);
         robot.Lback.setPower(0);
         robot.Rback.setPower(0);
-        robot.Rfront.setDirection(DcMotorSimple.Direction.REVERSE);
-        robot.Rback.setDirection(DcMotorSimple.Direction.REVERSE);
+        robot.Lfront.setDirection(DcMotorSimple.Direction.REVERSE);
+        robot.Lback.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
 
@@ -50,8 +50,12 @@ public class FTC2018_robotDummy_Manual extends OpMode{
         Rfronttmp = -leftStickX*0.35+leftStickY*0.35-rightStickX*0.3;
         Lbacktmp = -leftStickX*0.35+leftStickY*0.35+rightStickX*0.3;
         Rbacktmp = leftStickX*0.35+leftStickY*0.35-rightStickX*0.3;
-        telemetry.addData("gamepad1: ",gamepad1.atRest());
-        telemetry.addData("gamepad2: ",gamepad2.atRest());
+        robot.Lfront.setPower(Lfronttmp);
+        robot.Lback.setPower(Lbacktmp);
+        robot.Rfront.setPower(Rfronttmp);
+        robot.Rback.setPower(Rbacktmp);
+        telemetry.addData("gamepad1: ",!gamepad1.atRest());
+        telemetry.addData("gamepad2: ",!gamepad2.atRest());
         telemetry.update();
     }
 
