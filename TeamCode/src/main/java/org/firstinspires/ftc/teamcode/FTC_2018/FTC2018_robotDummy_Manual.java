@@ -54,18 +54,18 @@ public class FTC2018_robotDummy_Manual extends OpMode{
         telemetry.addData("Running", "Robot 1");
         //player1
         //drive
-        Lfrontforward = Lfrontforward*speed_old+(leftStickX*0.35+leftStickY*0.35)*speed_new;
+        /*Lfrontforward = Lfrontforward*speed_old+(leftStickX*0.35+leftStickY*0.35)*speed_new;
         Rfrontforward = Rfrontforward*speed_old+(-leftStickX*0.35+leftStickY*0.35)*speed_new;
         Lbackforward = Lbackforward*speed_old+(-leftStickX*0.35+leftStickY*0.35)*speed_new;
         Rbackforward = Rbackforward*speed_old+(leftStickX*0.35+leftStickY*0.35)*speed_new;
         Lfronttmp = Lfrontforward+rightStickX*0.3*speed_new;
         Rfronttmp = Rfrontforward-rightStickX*0.3*speed_new;
         Lbacktmp = Lbackforward+rightStickX*0.3*speed_new;
-        Rbacktmp = Rbackforward-rightStickX*0.3*speed_new;
-        /*Lfronttmp = leftStickX*0.35+leftStickY*0.35+rightStickX*0.3;
+        Rbacktmp = Rbackforward-rightStickX*0.3*speed_new;*/
+        Lfronttmp = leftStickX*0.35+leftStickY*0.35+rightStickX*0.3;
         Rfronttmp = -leftStickX*0.35+leftStickY*0.35-rightStickX*0.3;
         Lbacktmp = -leftStickX*0.35+leftStickY*0.35+rightStickX*0.3;
-        Rbacktmp = leftStickX*0.35+leftStickY*0.35-rightStickX*0.3;*/
+        Rbacktmp = leftStickX*0.35+leftStickY*0.35-rightStickX*0.3;
         telemetry.addData("leftStickX: ",leftStickX);
         telemetry.addData("leftStickY: ",leftStickY);
         telemetry.addData("rightStickX: ",rightStickX);
