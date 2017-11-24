@@ -6,9 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp(name="FTC2018_robot1_Manual", group="FTC 2018")
-public class FTC2018_robot1_Manual extends OpMode{
+public class FTC2018_robot1_Manual extends OpMode{//1
 
-    FTC2018_RobotInit_robot1 robot = new FTC2018_RobotInit_robot1();  //test
+    FTC2018_RobotInit_robot1 robot = new FTC2018_RobotInit_robot1();
 
     @Override
     public void init(){
