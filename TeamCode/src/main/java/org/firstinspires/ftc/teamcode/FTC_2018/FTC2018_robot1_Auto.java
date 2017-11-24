@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.FTC_2018;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
@@ -18,6 +20,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefaultListener;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
+import java.util.Set;
+
 
 @Autonomous(name="FTC2018_robot1_Auto", group ="FTC 2018")
 
@@ -29,8 +33,65 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
 
     VuforiaLocalizer vuforia;
 
-    @Override public void runOpMode() {
+    final public double LocalSpeed = 0.5;
 
+    FTC2018_RobotInit_robotDummy robot = new FTC2018_RobotInit_robotDummy();
+
+    public void initial(){
+        robot.Lfront.setPower(0);  //init
+        robot.Rfront.setPower(0);
+        robot.Rback.setPower(0);
+        robot.Lback.setPower(0);
+
+        robot.Lfront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.Rfront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.Lback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.Rback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.Lfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.Rfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.Lback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.Rback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+    }
+    public void SetDistanceToGo(double DistanceInCm, double LfrontPower, double RfrontPower, double LbackPower, double RbackPower){
+        //declare variable
+
+        double DiameterOfWheel = 10;
+        final double EncoderValue = 1680;
+        final double GearRatio = 2;
+        final double Pi = Math.PI;
+        double Circumference = DiameterOfWheel*Pi;
+        double DistanceOfEachCircleOfMotor = Circumference*GearRatio;
+        double ValueForEncoderFor1Cm = (EncoderValue/DistanceOfEachCircleOfMotor);
+        double ValueForEncoderTemp = 0;
+        int ValueForEncoder = 0;
+        int tmp = 0;
+        ValueForEncoderTemp = ValueForEncoderFor1Cm*DistanceInCm;
+        ValueForEncoder = (int) Math.round(ValueForEncoderTemp);
+        robot.Lfront.setTargetPosition(ValueForEncoder);
+        robot.Rfront.setTargetPosition(ValueForEncoder);
+        robot.Lback.setTargetPosition(ValueForEncoder);
+        robot.Rback.setTargetPosition(ValueForEncoder);
+        robot.Lfront.setPower(LfrontPower);
+        robot.Rfront.setPower(RfrontPower);
+        robot.Lback.setPower(LbackPower);
+        robot.Rback.setPower(RbackPower);
+    }
+    public void forward(double Distance){
+        SetDistanceToGo(Distance,LocalSpeed,LocalSpeed,LocalSpeed,LocalSpeed);
+    }
+    public void backward(double Distance){
+        SetDistanceToGo(Distance,-LocalSpeed,-LocalSpeed,-LocalSpeed,-LocalSpeed);
+    }
+    public void left(double Distance){
+        SetDistanceToGo(Distance,-LocalSpeed,LocalSpeed,LocalSpeed,-LocalSpeed);
+    }
+    public void right(double Distance){
+        SetDistanceToGo(Distance,LocalSpeed,-LocalSpeed,-LocalSpeed,LocalSpeed);
+    }
+    @Override public void runOpMode() {
+        initial();
+        forward(1000);
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
@@ -50,6 +111,9 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
         relicTrackables.activate();
 
         while (opModeIsActive()) {
+
+
+
 
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
             if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
