@@ -38,19 +38,19 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
     FTC2018_RobotInit_robotDummy robot = new FTC2018_RobotInit_robotDummy();
 
     public void initial(){
+        robot.init(hardwareMap);
         robot.Lfront.setPower(0);  //init
         robot.Rfront.setPower(0);
         robot.Rback.setPower(0);
         robot.Lback.setPower(0);
-
-        robot.Lfront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.Rfront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.Lback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.Rback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.Lfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.Rfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.Lback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.Rback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.Lfront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.Rfront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.Lback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.Rback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
     }
     public void SetDistanceToGo(double DistanceInCm, double LfrontPower, double RfrontPower, double LbackPower, double RbackPower){
@@ -67,7 +67,16 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
         int ValueForEncoder = 0;
         int tmp = 0;
         ValueForEncoderTemp = ValueForEncoderFor1Cm*DistanceInCm;
-        ValueForEncoder = (int) Math.round(ValueForEncoderTemp);
+        ValueForEncoder = (int) ValueForEncoderTemp;
+        robot.Lfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.Rfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.Lback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.Rback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.Lfront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.Rfront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.Lback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.Rback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         robot.Lfront.setTargetPosition(ValueForEncoder);
         robot.Rfront.setTargetPosition(ValueForEncoder);
         robot.Lback.setTargetPosition(ValueForEncoder);
@@ -76,6 +85,20 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
         robot.Rfront.setPower(RfrontPower);
         robot.Lback.setPower(LbackPower);
         robot.Rback.setPower(RbackPower);
+
+        while (opModeIsActive() && robot.Lfront.isBusy() && robot.Rfront.isBusy() && robot.Lback.isBusy() && robot.Rback.isBusy()){
+            robot.Lfront.setPower(0);
+            robot.Rfront.setPower(0);
+            robot.Lback.setPower(0);
+            robot.Rback.setPower(0);
+            telemetry.addData("Done","!");
+            telemetry.update();
+            telemetry.update();
+        }
+        robot.Lfront.setPower(0);
+        robot.Rfront.setPower(0);
+        robot.Lback.setPower(0);
+        robot.Rback.setPower(0);
     }
     public void forward(double Distance){
         SetDistanceToGo(Distance,LocalSpeed,LocalSpeed,LocalSpeed,LocalSpeed);
@@ -91,7 +114,7 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
     }
     @Override public void runOpMode() {
         initial();
-        forward(1000);
+
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
 
@@ -106,15 +129,13 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
 
         telemetry.addData("Status", "Camera is ready");
         telemetry.update();
+
         waitForStart();
 
-        relicTrackables.activate();
-
+        forward(1000);
+        /*relicTrackables.activate();
         while (opModeIsActive()) {
-
-
-
-
+            telemetry.addData("Position: ",robot.Lfront.getCurrentPosition());
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
             if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
 
@@ -151,10 +172,12 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
             }
             else {
                 telemetry.addData("Result", "not visible");
+                telemetry.addData("Position: ",robot.Lfront.getCurrentPosition());
+
             }
 
             telemetry.update();
-        }
+        }*/
     }
 
     String format(OpenGLMatrix transformationMatrix) {
