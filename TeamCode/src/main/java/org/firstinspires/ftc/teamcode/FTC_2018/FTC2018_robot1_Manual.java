@@ -30,8 +30,8 @@ public class FTC2018_robot1_Manual extends OpMode{
 //         robot.clipBL.setPosition(robot.clipBLopen);
 //         robot.clipBR.setPosition(robot.clipBRopen);
 //        robot.clipM2.setDirection(DcMotorSimple.Direction.REVERSE);
-        robot.Rfront.setDirection(DcMotorSimple.Direction.REVERSE);
-        robot.Rback.setDirection(DcMotorSimple.Direction.REVERSE);
+        robot.Lfront.setDirection(DcMotorSimple.Direction.REVERSE);
+        robot.Lback.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
 
@@ -58,22 +58,28 @@ public class FTC2018_robot1_Manual extends OpMode{
         double Lbacktmp = 0;
         double Rfronttmp = 0;
         double Rbacktmp = 0;
-        double cnt = 0;
-        double localSpeed = 0.6;
-        double speed_new = 0.2;
-        double speed_old = 0.8;
+        double Lfrontforward = 0;
+        double Lbackforward = 0;
+        double Rfrontforward = 0;
+        double Rbackforward = 0;
+        double speed_new = 0.3;
+        double speed_old = 0.4;
 
         telemetry.addData("Running", "Robot 1");
         //player1
         //drive
-        Lfronttmp = Lfronttmp*speed_old+(leftStickX*0.35+leftStickY*0.35+rightStickX*0.3)*speed_new;
-        Rfronttmp = Rfronttmp*speed_old+(-leftStickX*0.35+leftStickY*0.35-rightStickX*0.3)*speed_new;
-        Lbacktmp = Lbacktmp*speed_old+(-leftStickX*0.35+leftStickY*0.35+rightStickX*0.3)*speed_new;
-        Rbacktmp = Rbacktmp*speed_old+(leftStickX*0.35+leftStickY*0.35-rightStickX*0.3)*speed_new;
-        /*Lfronttmp = leftStickX*0.35+leftStickY*0.35+rightStickX*0.3;
+        /*Lfrontforward = Lfrontforward*speed_old+(leftStickX*0.35*speed_new);
+        Rfrontforward = Rfrontforward*speed_old+(-leftStickX*0.35*speed_new);
+        Lbackforward = Lbackforward*speed_old+(-leftStickX*0.35*speed_new);
+        Rbackforward = Rbackforward*speed_old+(leftStickX*0.35*speed_new);
+        Lfronttmp = Lfrontforward+rightStickX*0.3*speed_new+leftStickY*0.35;
+        Rfronttmp = Rfrontforward-rightStickX*0.3*speed_new+leftStickY*0.35;
+        Lbacktmp = Lbackforward+rightStickX*0.3*speed_new+leftStickY*0.35;
+        Rbacktmp = Rbackforward-rightStickX*0.3*speed_new+leftStickY*0.35;*/
+        Lfronttmp = leftStickX*0.35+leftStickY*0.35+rightStickX*0.3;
         Rfronttmp = -leftStickX*0.35+leftStickY*0.35-rightStickX*0.3;
         Lbacktmp = -leftStickX*0.35+leftStickY*0.35+rightStickX*0.3;
-        Rbacktmp = leftStickX*0.35+leftStickY*0.35-rightStickX*0.3;*/
+        Rbacktmp = leftStickX*0.35+leftStickY*0.35-rightStickX*0.3;
         robot.Lfront.setPower(Lfronttmp);
         robot.Lback.setPower(Lbacktmp);
         robot.Rfront.setPower(Rfronttmp);
