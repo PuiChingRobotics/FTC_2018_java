@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class FTC2018_RobotInit_robot1 {
 
-    public Servo clipL0;
-    public Servo clipR0;
+    /*public Servo clipL0;
+    public Servo clipR0;*/
     public Servo clipL1;
     public Servo clipR1;
     public Servo clipF1;
@@ -20,7 +20,7 @@ public class FTC2018_RobotInit_robot1 {
     public DcMotor Lback;
     public DcMotor Rback;
     public DcMotor clipM1;
-    public DcMotor clipM2;
+//    public DcMotor clipM2;
     public DcMotor lifting;
     public DcMotor Lruler;
     public DcMotor Rruler;
@@ -48,8 +48,8 @@ public class FTC2018_RobotInit_robot1 {
     public void init(HardwareMap hw){
         _hw = hw;
 
-        clipL0 = _hw.servo.get("clipL0");
-        clipR0 = _hw.servo.get("clipR0");
+        /*clipL0 = _hw.servo.get("clipL0");
+        clipR0 = _hw.servo.get("clipR0");*/
         clipL1 = _hw.servo.get("clipL1");
         clipR1 = _hw.servo.get("clipR1");
         //clipF1 = _hw.servo.get("clipF1");
@@ -62,7 +62,7 @@ public class FTC2018_RobotInit_robot1 {
         Lback = _hw.dcMotor.get("Lback");
         Rback = _hw.dcMotor.get("Rback");
         clipM1 = _hw.dcMotor.get("clipM1");
-        clipM2 = _hw.dcMotor.get("clipM2");
+//        clipM2 = _hw.dcMotor.get("clipM2");
         lifting = _hw.dcMotor.get("lifting");
         //Lruler = _hw.dcMotor.get("Lruler");
         //Rruler = _hw.dcMotor.get("Rruler");

@@ -24,12 +24,12 @@ public class FTC2018_robot1_Manual extends OpMode{
         robot.clipL1.setPosition(0.2);
         robot.clipR1.setPosition(0.8);
         robot.clipM1.setPower(0);
-        robot.clipM2.setPower(0);
+//        robot.clipM2.setPower(0);
 //         robot.clipF1.setPosition(0);
 //         robot.clipF2.setPosition(robot.clipStop);
 //         robot.clipBL.setPosition(robot.clipBLopen);
 //         robot.clipBR.setPosition(robot.clipBRopen);
-        robot.clipM2.setDirection(DcMotorSimple.Direction.REVERSE);
+//        robot.clipM2.setDirection(DcMotorSimple.Direction.REVERSE);
         robot.Rfront.setDirection(DcMotorSimple.Direction.REVERSE);
         robot.Rback.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -113,10 +113,10 @@ public class FTC2018_robot1_Manual extends OpMode{
         //player2
         //clip
         if (gamepad2.left_trigger != 0) robot.clipM1.setPower(0.2);
-        if (gamepad2.right_trigger != 0) robot.clipM2.setPower(0.15);
+//        if (gamepad2.right_trigger != 0) robot.clipM2.setPower(0.15);
 
         robot.clipM1.setPower(0.5*g2leftStickY);
-        robot.clipM2.setPower(0.5*g2rightStickY);
+//        robot.clipM2.setPower(0.5*g2rightStickY);
 
         /*if (gamepad2.a) {//close
             robot.clipL0.setPosition(robot.clipL0close);
