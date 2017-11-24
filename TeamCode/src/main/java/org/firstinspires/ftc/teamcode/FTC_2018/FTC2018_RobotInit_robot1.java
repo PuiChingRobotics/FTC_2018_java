@@ -9,6 +9,7 @@ public class FTC2018_RobotInit_robot1 {
 
     /*public Servo clipL0;
     public Servo clipR0;*/
+    //test
     public Servo clipL1;
     public Servo clipR1;
     public Servo clipF1;
