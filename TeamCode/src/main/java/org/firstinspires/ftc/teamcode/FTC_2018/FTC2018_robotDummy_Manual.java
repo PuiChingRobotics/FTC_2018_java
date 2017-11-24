@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp(name="FTC2018_robotDummy_Manual", group="FTC 2018")
 public class FTC2018_robotDummy_Manual extends OpMode{
 
-    FTC2018_RobotInit_robotDummy robot = new FTC2018_RobotInit_robotDummy();  //test
+    FTC2018_RobotInit_robotDummy robot = new FTC2018_RobotInit_robotDummy();
 
     @Override
     public void init(){

@@ -9,7 +9,6 @@ public class FTC2018_RobotInit_robot1 {
 
     /*public Servo clipL0;
     public Servo clipR0;*/
-    //test
     public Servo clipL1;
     public Servo clipR1;
     public Servo clipF1;
@@ -22,7 +21,7 @@ public class FTC2018_RobotInit_robot1 {
     public DcMotor Lback;
     public DcMotor Rback;
     public DcMotor clipM1;
-//    public DcMotor clipM2;
+    //    public DcMotor clipM2;
     public DcMotor lifting;
     public DcMotor Lruler;
     public DcMotor Rruler;
