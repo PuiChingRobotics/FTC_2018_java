@@ -33,7 +33,7 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
 
     VuforiaLocalizer vuforia;
 
-    final public double LocalSpeed = 0.5;
+    final public double LocalSpeed = 0.2;
 
     FTC2018_RobotInit_robotDummy robot = new FTC2018_RobotInit_robotDummy();
 
@@ -57,7 +57,7 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
         robot.Rback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
     }
-    public void SetDistanceToGo(double DistanceInCm, double LfrontPower, double RfrontPower, double LbackPower, double RbackPower){
+    public void SetDistanceToGo(double DistanceInCm, double LocalPowerAll, int LfrontEncoder, int RfrontEncoder, int LbackEncoder, int RbackEncoder){
         //declare variable
 
         double DiameterOfWheel = 10;
@@ -81,17 +81,16 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
         robot.Lback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.Rback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        robot.Lfront.setTargetPosition(ValueForEncoder);
-        robot.Rfront.setTargetPosition(ValueForEncoder);
-        robot.Lback.setTargetPosition(ValueForEncoder);
-        robot.Rback.setTargetPosition(ValueForEncoder);
-        robot.Lfront.setPower(LfrontPower);
-        robot.Rfront.setPower(RfrontPower);
-        robot.Lback.setPower(LbackPower);
-        robot.Rback.setPower(RbackPower);
+        robot.Lfront.setTargetPosition(ValueForEncoder*LfrontEncoder);
+        robot.Rfront.setTargetPosition(ValueForEncoder*RfrontEncoder);
+        robot.Lback.setTargetPosition(ValueForEncoder*LbackEncoder);
+        robot.Rback.setTargetPosition(ValueForEncoder*RbackEncoder);
+        robot.Lfront.setPower(LocalPowerAll);
+        robot.Rfront.setPower(LocalPowerAll);
+        robot.Lback.setPower(LocalPowerAll);
+        robot.Rback.setPower(LocalPowerAll);
 
         while (opModeIsActive() && robot.Lfront.isBusy() && robot.Rfront.isBusy() && robot.Lback.isBusy() && robot.Rback.isBusy()){
-
             telemetry.update();
         }
         robot.Lfront.setPower(0);
@@ -100,19 +99,24 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
         robot.Rback.setPower(0);
     }
     public void forward(double Distance){
-        SetDistanceToGo(Distance,LocalSpeed,LocalSpeed,LocalSpeed,LocalSpeed);
+        SetDistanceToGo(Distance,LocalSpeed,-1,1,-1,1);
     }
     public void backward(double Distance){
-        SetDistanceToGo(Distance,-LocalSpeed,-LocalSpeed,-LocalSpeed,-LocalSpeed);
+        SetDistanceToGo(Distance,LocalSpeed,1,-1,1,-1);
     }
     public void left(double Distance){
-        SetDistanceToGo(Distance,-LocalSpeed,LocalSpeed,LocalSpeed,-LocalSpeed);
+        //double Distance2 = 0;
+        Distance = Distance/0.8;
+        SetDistanceToGo(Distance,LocalSpeed,1,1,-1,-1);
     }
     public void right(double Distance){
-        SetDistanceToGo(Distance,LocalSpeed,-LocalSpeed,-LocalSpeed,LocalSpeed);
+        //double Distance2 = 0;
+        Distance = Distance/0.80;
+        SetDistanceToGo(Distance,LocalSpeed,-1,-1,1,1);
     }
     @Override public void runOpMode() {
         initial();
+        int check = 0;
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
@@ -130,21 +134,32 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
-        /*robot.Lfront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.Lfront.setPower(0.6);*/
-        backward(1000);
-        /*relicTrackables.activate();
-        while (opModeIsActive()) {
-            telemetry.addData("Position: ",robot.Lfront.getCurrentPosition());
+        relicTrackables.activate();
+        while (opModeIsActive() && check < 1) {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
             if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
 
                 telemetry.addData("Result",vuMark);
 
+                if (vuMark != RelicRecoveryVuMark.CENTER){
+                    if (vuMark != RelicRecoveryVuMark.LEFT){
+                        check = 3;
+                    }
+                }
+                if (vuMark != RelicRecoveryVuMark.CENTER){
+                    if (vuMark != RelicRecoveryVuMark.RIGHT){
+                        check = 2;
+                    }
+                }
+                if (vuMark != RelicRecoveryVuMark.RIGHT){
+                    if (vuMark != RelicRecoveryVuMark.LEFT){
+                        check = 1;
+                    }
+                }
                 OpenGLMatrix pose = ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).getPose();
                 telemetry.addData("Position", format(pose));
 
-                if (pose != null) {
+                /*if (pose != null) {
                     VectorF trans = pose.getTranslation();
                     Orientation rot = Orientation.getOrientation(pose, AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
 
@@ -168,19 +183,25 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
                     telemetry.addData("X-Coordinate","%.2f %s",tX,pX);
                     telemetry.addData("Y-Coordinate","%.2f %s",tY,pY);
                     telemetry.addData("Z-Coordinate","%.2f",tZ);
-                }
+                }*/
             }
             else {
                 telemetry.addData("Result", "not visible");
-                telemetry.addData("Position: ",robot.Lfront.getCurrentPosition());
-
             }
 
             telemetry.update();
-        }*/
+        }
+        telemetry.addData("Check",check);
+        telemetry.update();
+        forward(60);
+        left(30);
     }
+
+
+
 
     String format(OpenGLMatrix transformationMatrix) {
         return (transformationMatrix != null) ? transformationMatrix.formatAsTransform() : "null";
     }
+
 }
