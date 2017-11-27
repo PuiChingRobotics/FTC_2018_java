@@ -43,6 +43,10 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
         robot.Rfront.setPower(0);
         robot.Rback.setPower(0);
         robot.Lback.setPower(0);
+        robot.Lfront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.Rfront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.Lback.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.Rback.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.Lfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.Rfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.Lback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -87,12 +91,7 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
         robot.Rback.setPower(RbackPower);
 
         while (opModeIsActive() && robot.Lfront.isBusy() && robot.Rfront.isBusy() && robot.Lback.isBusy() && robot.Rback.isBusy()){
-            robot.Lfront.setPower(0);
-            robot.Rfront.setPower(0);
-            robot.Lback.setPower(0);
-            robot.Rback.setPower(0);
-            telemetry.addData("Done","!");
-            telemetry.update();
+
             telemetry.update();
         }
         robot.Lfront.setPower(0);
@@ -131,8 +130,9 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
-
-        forward(1000);
+        /*robot.Lfront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.Lfront.setPower(0.6);*/
+        backward(1000);
         /*relicTrackables.activate();
         while (opModeIsActive()) {
             telemetry.addData("Position: ",robot.Lfront.getCurrentPosition());
