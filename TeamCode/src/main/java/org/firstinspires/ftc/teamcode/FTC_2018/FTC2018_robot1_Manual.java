@@ -21,8 +21,6 @@ public class FTC2018_robot1_Manual extends OpMode{//1
         robot.lifting.setPower(0);
 //         robot.clipL0.setPosition(0.6);
 //         robot.clipR0.setPosition(0.4);
-        robot.clipL1.setPosition(0.2);
-        robot.clipR1.setPosition(0.8);
         robot.clipM1.setPower(0);
 //        robot.clipM2.setPower(0);
 //         robot.clipF1.setPosition(0);
@@ -57,24 +55,20 @@ public class FTC2018_robot1_Manual extends OpMode{//1
         double Lbacktmp = 0;
         double Rfronttmp = 0;
         double Rbacktmp = 0;
-        double Lfrontforward = 0;
-        double Lbackforward = 0;
-        double Rfrontforward = 0;
-        double Rbackforward = 0;
         double speed_new = 0.2;
         double speed_old = 0.8;
 
         telemetry.addData("Running", "Robot 1");
         //player1
         //drive
-        Lfrontforward = Lfrontforward*speed_old+leftStickX*speed_new;
-        Rfrontforward = Rfrontforward*speed_old-leftStickX*speed_new;
-        Lbackforward = Lbackforward*speed_old-leftStickX*speed_new;
-        Rbackforward = Rbackforward*speed_old+leftStickX*speed_new;
-        Lfronttmp = Lfrontforward*0.35+leftStickY*0.5+rightStickX*0.3;
-        Rfronttmp = Rfrontforward*0.35+leftStickY*0.5-rightStickX*0.3;
-        Lbacktmp = Lbackforward*0.35+leftStickY*0.5+rightStickX*0.3;
-        Rbacktmp = Rbackforward*0.35+leftStickY*0.5-rightStickX*0.3;
+        robot.Lfrontforward = robot.Lfrontforward*speed_old+leftStickY*speed_new;
+        robot.Rfrontforward = robot.Rfrontforward*speed_old+leftStickY*speed_new;
+        robot.Lbackforward = robot.Lbackforward*speed_old+leftStickY*speed_new;
+        robot.Rbackforward = robot.Rbackforward*speed_old+leftStickY*speed_new;
+        Lfronttmp = robot.Lfrontforward*0.6+leftStickX*0.6+rightStickX*0.4;
+        Rfronttmp = robot.Rfrontforward*0.6-leftStickX*0.6-rightStickX*0.4;
+        Lbacktmp = robot.Lbackforward*0.6-leftStickX*0.6+rightStickX*0.4;
+        Rbacktmp = robot.Rbackforward*0.6+leftStickX*0.6-rightStickX*0.4;
      /*   Lfronttmp = leftStickX*0.35+leftStickY*0.35+rightStickX*0.3;
         Rfronttmp = -leftStickX*0.35+leftStickY*0.35-rightStickX*0.3;
         Lbacktmp = -leftStickX*0.35+leftStickY*0.35+rightStickX*0.3;
@@ -118,6 +112,11 @@ public class FTC2018_robot1_Manual extends OpMode{//1
         telemetry.addData("leftStickY: ",leftStickY);
         telemetry.addData("rightStickX: ",rightStickX);
         telemetry.addData("rightStickY: ",rightStickY);
+
+        telemetry.addData("Lfrontforward: ",robot.Lfrontforward);
+        telemetry.addData("Rfrontforward: ",robot.Rfrontforward);
+        telemetry.addData("Lbackforward: ",robot.Lbackforward);
+        telemetry.addData("Rbackforward: ",robot.Rbackforward);
 
         telemetry.addData("Lfronttmp: ",Lfronttmp);
         telemetry.addData("Rfronttmp: ",Rfronttmp);
