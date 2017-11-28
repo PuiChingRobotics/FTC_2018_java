@@ -23,9 +23,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import java.util.Set;
 
 
-@Autonomous(name="FTC2018_robot1_Auto", group ="FTC 2018")
+@Autonomous(name="FTC2018_robot1_Auto_Red", group ="FTC 2018")
 
-public class FTC2018_robot1_Auto extends LinearOpMode {
+public class FTC2018_robot1_Auto_Red extends LinearOpMode {
 
     public static final String TAG = "Vuforia VuMark Sample";
 
@@ -193,8 +193,25 @@ public class FTC2018_robot1_Auto extends LinearOpMode {
         }
         telemetry.addData("Check",check);
         telemetry.update();
-        forward(60);
-        left(30);
+        if (check == 3 ){
+            forward(60);
+            left(30);
+        }
+        if (check == 2 ){
+            forward(60);
+            right(30);
+        }
+        if (check == 1 ){
+            forward(60);
+            left(30);
+            forward(60);
+        }
+        if (check == 0 ){
+            forward(60);
+            left(60);
+            backward(60);
+        }
+
     }
 
 
