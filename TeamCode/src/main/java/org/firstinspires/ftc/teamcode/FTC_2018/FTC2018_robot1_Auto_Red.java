@@ -193,20 +193,20 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
         }
         telemetry.addData("Check",check);
         telemetry.update();
-        if (check == 3 ){
+        if (check == 3 ){           //right
             forward(60);
             left(30);
         }
-        if (check == 2 ){
+        if (check == 2 ){           //left
             forward(60);
             right(30);
         }
-        if (check == 1 ){
+        if (check == 1 ){           //centre
             forward(60);
             left(30);
             forward(60);
         }
-        if (check == 0 ){
+        if (check == 0 ){           //unknown
             forward(60);
             left(60);
             backward(60);
