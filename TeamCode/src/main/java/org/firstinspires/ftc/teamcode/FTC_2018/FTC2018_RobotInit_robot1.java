@@ -5,11 +5,13 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
-public class FTC2018_RobotInit_robot1 {
+public class FTC2018_RobotInit_robot1 {//1
 
     /*public Servo clipL0;
     public Servo clipR0;*/
     public Servo clipL1;
+    public Servo clipR0;
+    public Servo clipL0;
     public Servo clipR1;
     public Servo clipF1;
     public Servo clipF2;
@@ -29,16 +31,14 @@ public class FTC2018_RobotInit_robot1 {
     public final double clipDown = 1;
     public final double clipUp = 0;
     public final double clipStop = 0.52;
-    /*public final double clipL0open = 0.6;
+    public final double clipL1open = 0;
+    public final double clipR1open = 1;
+    public final double clipL1close = 1;
+    public final double clipR1close = 0;
+    public final double clipL0open = 0.6;
     public final double clipR0open = 0.4;
     public final double clipL0close = 0;
-    public final double clipR0close = 1;*/
-//    public final double clipL1open = 0.6;
-//    public final double clipR1open = 0.4;
-    public final double clipL1open = 1;
-    public final double clipR1open = 0;
-    public final double clipL1close = 0;
-    public final double clipR1close = 1;
+    public final double clipR0close = 1;
     public final double clipBLopen = 0.03;
     public final double clipBLclose = 0;
     public final double clipBLfullopen = 0.5;
@@ -55,8 +55,8 @@ public class FTC2018_RobotInit_robot1 {
     public void init(HardwareMap hw){
         _hw = hw;
 
-        /*clipL0 = _hw.servo.get("clipL0");
-        clipR0 = _hw.servo.get("clipR0");*/
+        clipL0 = _hw.servo.get("clipL0");
+        clipR0 = _hw.servo.get("clipR0");
         clipL1 = _hw.servo.get("clipL1");
         clipR1 = _hw.servo.get("clipR1");
         //clipF1 = _hw.servo.get("clipF1");
