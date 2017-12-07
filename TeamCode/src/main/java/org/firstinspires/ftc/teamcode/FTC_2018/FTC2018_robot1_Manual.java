@@ -92,15 +92,15 @@ public class FTC2018_robot1_Manual extends OpMode{
             robot.clipBR.setPosition(robot.clipBRfullopen);
         }
 
-        if (gamepad1.dpad_left == true) robot.lifting.setPower(0.3);
-        else if (gamepad1.dpad_right == true) robot.lifting.setPower(-0.3);
-        else robot.lifting.setPower(0);
+        /*if (gamepad1.dpad_down == true) robot.lifting.setPower(0.3);//left 1
+        else if (gamepad1.dpad_up == true) robot.lifting.setPower(-0.3);//right -1
+        else robot.lifting.setPower(0);*/
 
         //rope
-        if (gamepad1.left_trigger != 0) robot.rope.setPower(1);
-        else if (gamepad1.right_trigger != 0) robot.rope.setPower(-1);
+        if (gamepad1.left_trigger != 0) robot.rope.setPower(0.3);
+        else if (gamepad1.right_trigger != 0) robot.rope.setPower(-0.3);
         else robot.rope.setPower(0);
-        
+
         /*if (gamepad1.dpad_up) robot.clipF2.setPosition(robot.clipUp);
         else if (gamepad1.dpad_down) robot.clipF2.setPosition(robot.clipDown);
         else robot.clipF2.setPosition(robot.clipStop);/*
@@ -122,7 +122,7 @@ public class FTC2018_robot1_Manual extends OpMode{
         telemetry.addData("Rfronttmp: ",Rfronttmp);
         telemetry.addData("Lbacktmp: ",Lbacktmp);
         telemetry.addData("Rbacktmp: ",Rbacktmp);
-        
+
         //player2
         //clip
         if (gamepad2.left_trigger != 0) robot.clipM1.setPower(0.2);
