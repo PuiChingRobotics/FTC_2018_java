@@ -47,6 +47,11 @@ public class FTC2018_RobotInit_robot1 {
     public final double clipBRclose = 1;        //unuesd
     public final double clipBRfullopen = 0.5;   //unuesd
 
+    public double Lfronttmp = 0;
+    public double Lbacktmp = 0;
+    public double Rfronttmp = 0;
+    public double Rbacktmp = 0;
+
     public double Lfrontforward = 0;
     public double Lbackforward = 0;
     public double Rfrontforward = 0;

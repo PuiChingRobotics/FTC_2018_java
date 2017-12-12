@@ -54,30 +54,27 @@ public class FTC2018_robot1_Manual extends OpMode{
         double g2rightStickX = gamepad2.right_stick_x;
         double g2rightStickY = -gamepad2.right_stick_y;
 
-        double Lfronttmp = 0;
-        double Lbacktmp = 0;
-        double Rfronttmp = 0;
-        double Rbacktmp = 0;
-
         double speed_new = 0.2;
         double speed_old = 0.8;
 
         telemetry.addData("Running", "Robot 1");
         //player1
         //drive
+
         robot.Lfrontforward = robot.Lfrontforward*speed_old+leftStickY*speed_new;
-        robot.Rfrontforward = robot.Rfrontforward*speed_old-leftStickY*speed_new;
-        robot.Lbackforward = robot.Lbackforward*speed_old-leftStickY*speed_new;
+        robot.Rfrontforward = robot.Rfrontforward*speed_old+leftStickY*speed_new;
+        robot.Lbackforward = robot.Lbackforward*speed_old+leftStickY*speed_new;
         robot.Rbackforward = robot.Rbackforward*speed_old+leftStickY*speed_new;
 
-        Lfronttmp = robot.Lfrontforward*0.6+leftStickX*0.6+rightStickX*0.4;
-        Rfronttmp = robot.Rfrontforward*0.6-leftStickX*0.6-rightStickX*0.4;
-        Lbacktmp = robot.Lbackforward*0.6-leftStickX*0.6+rightStickX*0.4;
-        Rbacktmp = robot.Rbackforward*0.6+leftStickX*0.6-rightStickX*0.4;
-        robot.Lfront.setPower(Lfronttmp);
-        robot.Lback.setPower(Lbacktmp);
-        robot.Rfront.setPower(Rfronttmp);
-        robot.Rback.setPower(Rbacktmp);
+        robot.Lfronttmp = robot.Lfrontforward*0.6+leftStickX*0.6+rightStickX*0.4;
+        robot.Rfronttmp = robot.Rfrontforward*0.6-leftStickX*0.6-rightStickX*0.4;
+        robot.Lbacktmp = robot.Lbackforward*0.6-leftStickX*0.6+rightStickX*0.4;
+        robot.Rbacktmp = robot.Rbackforward*0.6+leftStickX*0.6-rightStickX*0.4;
+
+        robot.Lfront.setPower(robot.Lfronttmp);
+        robot.Lback.setPower(robot.Lbacktmp);
+        robot.Rfront.setPower(robot.Rfronttmp);
+        robot.Rback.setPower(robot.Rbacktmp);
 
         telemetry.addData("gamepad1: ",!gamepad1.atRest());
         telemetry.addData("leftStickX: ",leftStickX);
@@ -90,10 +87,10 @@ public class FTC2018_robot1_Manual extends OpMode{
         telemetry.addData("Lbackforward: ",robot.Lbackforward);
         telemetry.addData("Rbackforward: ",robot.Rbackforward);
 
-        telemetry.addData("Lfronttmp: ",Lfronttmp);
-        telemetry.addData("Rfronttmp: ",Rfronttmp);
-        telemetry.addData("Lbacktmp: ",Lbacktmp);
-        telemetry.addData("Rbacktmp: ",Rbacktmp);
+        telemetry.addData("Lfronttmp: ",robot.Lfronttmp);
+        telemetry.addData("Rfronttmp: ",robot.Rfronttmp);
+        telemetry.addData("Lbacktmp: ",robot.Lbacktmp);
+        telemetry.addData("Rbacktmp: ",robot.Rbacktmp);
 
         //Glyph Clip
         if (gamepad1.a) {//close
