@@ -42,6 +42,90 @@ public class FTC2018_robot1_Manual extends OpMode{
 
     }
 
+    public void Glyph_Monkey(){
+        //Glyph Clip
+        if (gamepad1.a) {//close
+            robot.clipL0.setPosition(robot.clipL0close);
+            robot.clipR0.setPosition(robot.clipR0close);
+        }
+        if (gamepad1.b) {//open
+            robot.clipL0.setPosition(robot.clipL0open);
+            robot.clipR0.setPosition(robot.clipR0open);
+        }
+
+        if (gamepad1.x) {//open
+            robot.clipL1.setPosition(robot.clipL1open);
+            robot.clipR1.setPosition(robot.clipR1open);
+        }
+        if (gamepad1.y) {//close
+            robot.clipL1.setPosition(robot.clipL1close);
+            robot.clipR1.setPosition(robot.clipR1close);
+        }
+
+        if (gamepad1.dpad_up == true) {
+            robot.lifting.setPower(1);
+            robot.rope.setPower(1);
+        }
+        else if (gamepad1.dpad_down == true) {
+            robot.lifting.setPower(-1);
+            robot.rope.setPower(-1);
+        }
+        else {
+            if (gamepad1.left_bumper == true) robot.lifting.setPower(0.7);          //down  //front motor
+            else if (gamepad1.right_bumper == true) robot.lifting.setPower(-0.7);   //up    //front motor
+            else robot.lifting.setPower(0);
+
+            if (gamepad1.left_trigger != 0) robot.rope.setPower(-0.7);              //down  //back motor
+            else if (gamepad1.right_trigger != 0) robot.rope.setPower(0.7);         //up     //back motor
+            else robot.rope.setPower(0);
+        }
+    }
+
+    public void Glyph_Roll() {
+
+        if (gamepad2.a) {//close
+            robot.clipL0.setPosition(1);
+            robot.clipR0.setPosition(0);
+        }
+        if (gamepad2.b) {//open
+            robot.clipL0.setPosition(0.05);
+            robot.clipR0.setPosition(0.96);
+        }
+        if (gamepad2.x) {//half-open
+            robot.clipL0.setPosition(0.11);
+            robot.clipR0.setPosition(0.89);
+        }
+
+        robot.lifting.setPower(gamepad2.left_stick_y);
+        robot.rope.setPower(-gamepad2.left_stick_y);
+    }
+
+    public void Relic_Ruler() {
+        if (gamepad1.x) {//open
+            robot.clipBL.setPosition(robot.clipBLopen);
+            robot.clipBR.setPosition(robot.clipBRopen);
+        }
+        else if (gamepad1.y) {//close
+            robot.clipBL.setPosition(robot.clipBLclose);
+            robot.clipBR.setPosition(robot.clipBRclose);
+        }
+        else if (gamepad1.b) {//fully open
+            robot.clipBL.setPosition(robot.clipBLfullopen);
+            robot.clipBR.setPosition(robot.clipBRfullopen);
+        }
+    }
+
+    public void Relic_Dennis() {
+        if (gamepad2.x) {//open
+            robot.clipL1.setPosition(robot.clipL1open);
+            robot.clipR1.setPosition(robot.clipR1open);
+        }
+        if (gamepad2.y) {//close
+            robot.clipL1.setPosition(robot.clipL1close);
+            robot.clipR1.setPosition(robot.clipR1close);
+        }
+    }
+
     @Override
     public void loop(){
 
@@ -92,70 +176,14 @@ public class FTC2018_robot1_Manual extends OpMode{
         telemetry.addData("Lbacktmp: ",robot.Lbacktmp);
         telemetry.addData("Rbacktmp: ",robot.Rbacktmp);
 
-        //Glyph Clip
-        if (gamepad1.a) {//close
-            robot.clipL0.setPosition(robot.clipL0close);
-            robot.clipR0.setPosition(robot.clipR0close);
-        }
-        if (gamepad1.b) {//open
-            robot.clipL0.setPosition(robot.clipL0open);
-            robot.clipR0.setPosition(robot.clipR0open);
-        }
+        telemetry.addData("robot.Design: ",robot.Design);
 
-        if (gamepad1.x) {//open
-            robot.clipL1.setPosition(robot.clipL1open);
-            robot.clipR1.setPosition(robot.clipR1open);
-        }
-        if (gamepad1.y) {//close
-            robot.clipL1.setPosition(robot.clipL1close);
-            robot.clipR1.setPosition(robot.clipR1close);
-        }
+        //Glyph_Monkey();
 
-        if (gamepad1.dpad_up == true) {
-            robot.lifting.setPower(1);
-            robot.rope.setPower(1);
-        }
-        else if (gamepad1.dpad_down == true) {
-            robot.lifting.setPower(-1);
-            robot.rope.setPower(-1);
-        }
-        else {
-            if (gamepad1.left_bumper == true) robot.lifting.setPower(0.7);       //down  //front motor
-            else if (gamepad1.right_bumper == true) robot.lifting.setPower(-0.7);  //up    //front motor
-            else robot.lifting.setPower(0);
-
-            if (gamepad1.left_trigger != 0) robot.rope.setPower(-0.7);            //down  //back motor
-            else if (gamepad1.right_trigger != 0) robot.rope.setPower(0.7);       //up    //back motor
-            else robot.rope.setPower(0);
-        }
-
-
-
-
-        /*//Relic-Ruler //unuesd
-        if (gamepad1.x) {//open
-            robot.clipBL.setPosition(robot.clipBLopen);
-            robot.clipBR.setPosition(robot.clipBRopen);
-        }
-        else if (gamepad1.y) {//close
-            robot.clipBL.setPosition(robot.clipBLclose);
-            robot.clipBR.setPosition(robot.clipBRclose);
-        }
-        else if (gamepad1.b) {//fully open
-            robot.clipBL.setPosition(robot.clipBLfullopen);
-            robot.clipBR.setPosition(robot.clipBRfullopen);
-        }*/
+        Glyph_Roll();
 
         //player2
-        //Relic-Dennis
-        if (gamepad2.x) {//open
-            robot.clipL1.setPosition(robot.clipL1open);
-            robot.clipR1.setPosition(robot.clipR1open);
-        }
-        if (gamepad2.y) {//close
-            robot.clipL1.setPosition(robot.clipL1close);
-            robot.clipR1.setPosition(robot.clipR1close);
-        }
+        Relic_Dennis();
 
         telemetry.addData("Rope: ",robot.rope.getPower());
         telemetry.addData("gamepad2: ",!gamepad2.atRest());

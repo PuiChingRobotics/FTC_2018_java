@@ -30,15 +30,15 @@ public class FTC2018_RobotInit_robot1 {
     public final double clipUp = 0;     //continuous servo value
     public final double clipStop = 0.52;//continuous servo value
 
-    public final double clipL0open = 1;
-    public final double clipR0open = 0;
+    public final double clipL0open = 0.5;
+    public final double clipR0open = 0.5;
     public final double clipL0close = 0;
     public final double clipR0close = 1;
 
-    public final double clipL1open = 0;
-    public final double clipR1open = 1;
-    public final double clipL1close = 1;
-    public final double clipR1close = 0;
+    public final double clipL1open = 0.6;
+    public final double clipR1open = 0.4;
+    public final double clipL1close = 0;
+    public final double clipR1close = 1;
 
     public final double clipBLopen = 0.03;      //unuesd
     public final double clipBLclose = 0;        //unuesd
@@ -56,6 +56,8 @@ public class FTC2018_RobotInit_robot1 {
     public double Lbackforward = 0;
     public double Rfrontforward = 0;
     public double Rbackforward = 0;
+
+    public double Design = 0;
 
     public HardwareMap _hw;
 
