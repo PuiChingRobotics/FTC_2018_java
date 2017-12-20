@@ -87,17 +87,30 @@ public class FTC2018_robot1_Manual extends OpMode{
             robot.clipL0.setPosition(1);
             robot.clipR0.setPosition(0);
         }
-        if (gamepad2.b) {//open
-            robot.clipL0.setPosition(0.05);
-            robot.clipR0.setPosition(0.96);
+        else if (gamepad2.b) {//open
+            robot.clipL0.setPosition(0.1);//0.05
+            robot.clipR0.setPosition(0.9);//0.96
         }
-        if (gamepad2.x) {//half-open
-            robot.clipL0.setPosition(0.11);
-            robot.clipR0.setPosition(0.89);
+        else if (gamepad2.x) {//half-open
+            robot.clipL0.setPosition(0.2);//0.11
+            robot.clipR0.setPosition(0.8);//0.89
         }
 
         robot.lifting.setPower(gamepad2.left_stick_y);
         robot.rope.setPower(-gamepad2.left_stick_y);
+
+        if (gamepad1.right_bumper) {
+            robot.Lfront.setPower(-1);
+            robot.Lback.setPower(1);
+        }
+        else if (gamepad1.left_bumper) {
+            robot.Lfront.setPower(1);
+            robot.Lback.setPower(-1);
+        }
+        else {
+            robot.Lfront.setPower(0);
+            robot.Lback.setPower(0);
+        }
     }
 
     public void Relic_Ruler() {
@@ -155,10 +168,10 @@ public class FTC2018_robot1_Manual extends OpMode{
         robot.Lbacktmp = robot.Lbackforward*0.6-leftStickX*0.6+rightStickX*0.4;
         robot.Rbacktmp = robot.Rbackforward*0.6+leftStickX*0.6-rightStickX*0.4;
 
-        robot.Lfront.setPower(robot.Lfronttmp);
+        /*robot.Lfront.setPower(robot.Lfronttmp);
         robot.Lback.setPower(robot.Lbacktmp);
         robot.Rfront.setPower(robot.Rfronttmp);
-        robot.Rback.setPower(robot.Rbacktmp);
+        robot.Rback.setPower(robot.Rbacktmp);*/
 
         telemetry.addData("gamepad1: ",!gamepad1.atRest());
         telemetry.addData("leftStickX: ",leftStickX);
@@ -183,7 +196,7 @@ public class FTC2018_robot1_Manual extends OpMode{
         Glyph_Roll();
 
         //player2
-        Relic_Dennis();
+        //Relic_Dennis();
 
         telemetry.addData("Rope: ",robot.rope.getPower());
         telemetry.addData("gamepad2: ",!gamepad2.atRest());
