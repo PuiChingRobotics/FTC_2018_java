@@ -123,7 +123,7 @@ public class FTC2018_robot1_Manual extends OpMode{
         robot.Rrope.setPower(-gamepad2.right_stick_y);
     }
 
-    public void Relic_Dennis() {
+    public void Relic_Arm() {
         if (gamepad2.x) {//open
             robot.clipL0.setPosition(robot.clipL1open);
         }
@@ -164,8 +164,10 @@ public class FTC2018_robot1_Manual extends OpMode{
         else robot.clipBL.setPosition(Range.clip(-gamepad2.right_stick_y+robot.clipStop,robot.clipDown,robot.clipUp));
     }
 
-    public double RoundDown3dp(double value){
-        return Math.round(value*1000)/1000;
+    public double RoundDownDp(double value, double place){
+        double result = value / place;
+        result = Math.floor(result)*place;
+        return result;
     }
 
     @Override
@@ -187,15 +189,15 @@ public class FTC2018_robot1_Manual extends OpMode{
         //player1
         //drive
 
-        robot.Lfrontforward = RoundDown3dp(robot.Lfrontforward*speed_old+leftStickY*speed_new);
-        robot.Rfrontforward = RoundDown3dp(robot.Rfrontforward*speed_old+leftStickY*speed_new);
-        robot.Lbackforward = RoundDown3dp(robot.Lbackforward*speed_old+leftStickY*speed_new);
-        robot.Rbackforward = RoundDown3dp(robot.Rbackforward*speed_old+leftStickY*speed_new);
+        robot.Lfrontforward = RoundDownDp(robot.Lfrontforward*speed_old+leftStickY*speed_new,0.001);
+        robot.Rfrontforward = RoundDownDp(robot.Rfrontforward*speed_old+leftStickY*speed_new,0.001);
+        robot.Lbackforward = RoundDownDp(robot.Lbackforward*speed_old+leftStickY*speed_new,0.001);
+        robot.Rbackforward = RoundDownDp(robot.Rbackforward*speed_old+leftStickY*speed_new,0.001);
 
-        robot.Lfronttmp = RoundDown3dp(robot.Lfrontforward*0.5+leftStickX*0.8+rightStickX*0.5);
-        robot.Rfronttmp = RoundDown3dp(robot.Rfrontforward*0.5-leftStickX*0.8-rightStickX*0.5);
-        robot.Lbacktmp = RoundDown3dp(robot.Lbackforward*0.5-leftStickX*0.8+rightStickX*0.5);
-        robot.Rbacktmp = RoundDown3dp(robot.Rbackforward*0.5+leftStickX*0.8-rightStickX*0.5);
+        robot.Lfronttmp = RoundDownDp(robot.Lfrontforward*0.5+leftStickX*0.8+rightStickX*0.5,0.001);
+        robot.Rfronttmp = RoundDownDp(robot.Rfrontforward*0.5-leftStickX*0.8-rightStickX*0.5,0.001);
+        robot.Lbacktmp = RoundDownDp(robot.Lbackforward*0.5-leftStickX*0.8+rightStickX*0.5,0.001);
+        robot.Rbacktmp = RoundDownDp(robot.Rbackforward*0.5+leftStickX*0.8-rightStickX*0.5,0.001);
 
         robot.Lfront.setPower(robot.Lfronttmp);
         robot.Lback.setPower(robot.Lbacktmp);
@@ -218,12 +220,12 @@ public class FTC2018_robot1_Manual extends OpMode{
         telemetry.addData("Lbacktmp: ",robot.Lbacktmp);
         telemetry.addData("Rbacktmp: ",robot.Rbacktmp);
 
-        Glyph_DoubleClip();
+        //Glyph_DoubleClip();
         //Glyph_Roll();
 
         //player2
-        Relic_Z();
-        //Relic_Dennis();
+        //Relic_Z();
+        Relic_Arm();
         //Relic_Ruler();
 
         telemetry.addData("gamepad2: ",!gamepad2.atRest());
