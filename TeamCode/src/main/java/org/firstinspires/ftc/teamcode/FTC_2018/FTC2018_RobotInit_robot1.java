@@ -17,17 +17,17 @@ public class FTC2018_RobotInit_robot1 {
 
     public DcMotor rope;
     public DcMotor lifting;
-    public DcMotor clipM1;
-    // public DcMotor Lruler;
-    // public DcMotor Rruler;
+
+    public DcMotor Lrope;
+    public DcMotor Rrope;
 
     public DcMotor Lfront;
     public DcMotor Rfront;
     public DcMotor Lback;
     public DcMotor Rback;
 
-    public final double clipDown = 1;   //continuous servo value
-    public final double clipUp = 0;     //continuous servo value
+    public final double clipDown = 0;   //continuous servo value
+    public final double clipUp = 1;     //continuous servo value
     public final double clipStop = 0.52;//continuous servo value
 
     public final double clipL0open = 0.5;
@@ -40,12 +40,12 @@ public class FTC2018_RobotInit_robot1 {
     public final double clipL1close = 0;
     public final double clipR1close = 1;
 
-    public final double clipBLopen = 0.03;      //unuesd
-    public final double clipBLclose = 0;        //unuesd
-    public final double clipBLfullopen = 0.5;   //unuesd
-    public final double clipBRopen = 0.97;      //unuesd
-    public final double clipBRclose = 1;        //unuesd
-    public final double clipBRfullopen = 0.5;   //unuesd
+    public final double clipBLopen = 0.1;
+    public final double clipBLclose = 0;
+    public final double clipBLfullopen = 1;
+    public final double clipBRopen = 0.9;
+    public final double clipBRclose = 1;
+    public final double clipBRfullopen = 0;
 
     public double Lfronttmp = 0;
     public double Lbacktmp = 0;
@@ -56,8 +56,6 @@ public class FTC2018_RobotInit_robot1 {
     public double Lbackforward = 0;
     public double Rfrontforward = 0;
     public double Rbackforward = 0;
-
-    public double Design = 0;
 
     public HardwareMap _hw;
 
@@ -74,20 +72,18 @@ public class FTC2018_RobotInit_robot1 {
 
         rope = _hw.dcMotor.get("rope");
         lifting = _hw.dcMotor.get("lifting");
-        clipM1 = _hw.dcMotor.get("clipM1");
 
-        //Lruler = _hw.dcMotor.get("Lruler");
-        //Rruler = _hw.dcMotor.get("Rruler");
+        Lrope = _hw.dcMotor.get("Lrope");
+        Rrope = _hw.dcMotor.get("Rrope");
 
         Lfront = _hw.dcMotor.get("Lfront");
         Rfront = _hw.dcMotor.get("Rfront");
         Lback = _hw.dcMotor.get("Lback");
         Rback = _hw.dcMotor.get("Rback");
 
-
-
         Lfront.setDirection(DcMotorSimple.Direction.REVERSE);
         Lback.setDirection(DcMotorSimple.Direction.REVERSE);
+        Rrope.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
 

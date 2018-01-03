@@ -35,7 +35,7 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
 
     final public double LocalSpeed = 0.2;
 
-    FTC2018_RobotInit_robotDummy robot = new FTC2018_RobotInit_robotDummy();
+    FTC2018_RobotInit_robot1 robot = new FTC2018_RobotInit_robot1();
 
     public void initial(){
         robot.init(hardwareMap);
@@ -193,6 +193,12 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
         }
         telemetry.addData("Check",check);
         telemetry.update();
+        while (opModeIsActive()){
+            telemetry.addData("Lfront",robot.Lfront.getCurrentPosition());
+            telemetry.addData("Lback",robot.Lback.getCurrentPosition());
+            telemetry.addData("Rfront",robot.Rfront.getCurrentPosition());
+            telemetry.addData("Rback",robot.Rback.getCurrentPosition());
+        }
         if (check == 3 ){           //right
             forward(60);
             left(30);
@@ -211,7 +217,7 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
             left(60);
             backward(60);
         }
-
+        telemetry.update();
     }
 
 
