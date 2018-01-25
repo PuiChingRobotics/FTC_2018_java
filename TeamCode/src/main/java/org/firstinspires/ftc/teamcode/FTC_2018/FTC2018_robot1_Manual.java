@@ -232,7 +232,7 @@ public class FTC2018_robot1_Manual extends OpMode{
         double g2rightStickY = -gamepad2.right_stick_y;
 
         double speed_new = 0.2;
-        double speed_old = 0.8;
+        double speed_old = 0.8;//
 
 
         telemetry.addData("Running", "Robot 1");

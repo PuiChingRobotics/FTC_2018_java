@@ -61,7 +61,7 @@ public class FTC2018_RobotInit_robot1 {
     public double Rbackforward = 0;
 
     public double tmp;
-
+//
     public HardwareMap _hw;
 
     public void init(HardwareMap hw){
