@@ -21,6 +21,9 @@ public class FTC2018_RobotInit_robot1 {
     public DcMotor Lrope;
     public DcMotor Rrope;
 
+    public DcMotor Lroll;
+    public DcMotor Rroll;
+
     public DcMotor Lfront;
     public DcMotor Rfront;
     public DcMotor Lback;
@@ -28,14 +31,14 @@ public class FTC2018_RobotInit_robot1 {
 
     public final double clipDown = 0;   //continuous servo value
     public final double clipUp = 1;     //continuous servo value
-    public final double clipStop = 0.52;//continuous servo value
+    public final double clipStop = 0.5;//continuous servo value
 
     public final double clipL0open = 0.5;
     public final double clipR0open = 0.5;
     public final double clipL0close = 0;
     public final double clipR0close = 1;
 
-    public final double clipL1open = 0.6;
+    public final double clipL1open = 0.8;
     public final double clipR1open = 0.4;
     public final double clipL1close = 0;
     public final double clipR1close = 1;
@@ -57,6 +60,8 @@ public class FTC2018_RobotInit_robot1 {
     public double Rfrontforward = 0;
     public double Rbackforward = 0;
 
+    public double tmp;
+
     public HardwareMap _hw;
 
     public void init(HardwareMap hw){
@@ -76,14 +81,19 @@ public class FTC2018_RobotInit_robot1 {
         Lrope = _hw.dcMotor.get("Lrope");
         Rrope = _hw.dcMotor.get("Rrope");
 
+        Lroll = _hw.dcMotor.get("Lroll");
+        Rroll = _hw.dcMotor.get("Rroll");
+
         Lfront = _hw.dcMotor.get("Lfront");
         Rfront = _hw.dcMotor.get("Rfront");
         Lback = _hw.dcMotor.get("Lback");
         Rback = _hw.dcMotor.get("Rback");
 
-        Lfront.setDirection(DcMotorSimple.Direction.REVERSE);
-        Lback.setDirection(DcMotorSimple.Direction.REVERSE);
+        Rfront.setDirection(DcMotorSimple.Direction.REVERSE);
+        Rback.setDirection(DcMotorSimple.Direction.REVERSE);
         Rrope.setDirection(DcMotorSimple.Direction.REVERSE);
+        Lroll.setDirection(DcMotorSimple.Direction.REVERSE);
+        rope.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
 
