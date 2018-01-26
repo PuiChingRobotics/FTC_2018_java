@@ -20,7 +20,7 @@ public class FTC2018_robot1_Manual extends OpMode{
         robot.Rback.setPower(0);
 
         robot.rope.setPower(0);
-        robot.lifting.setPower(1);
+        robot.lifting.setPower(0);
 
         robot.Lrope.setPower(0);
         robot.Rrope.setPower(0);
@@ -98,12 +98,30 @@ public class FTC2018_robot1_Manual extends OpMode{
             robot.clipL0.setPosition(0.2);//0.2
             robot.clipR0.setPosition(0.8);//0.8
         }
-
-        robot.Lroll.setPower(gamepad2.left_stick_y);
-        robot.Rroll.setPower(gamepad2.left_stick_y);
-
-        robot.Lrope.setPower(-gamepad2.right_stick_y);
-        robot.Rrope.setPower(-gamepad2.right_stick_y);
+        if (gamepad2.dpad_left){
+            robot.Lroll.setPower(1);
+            robot.Rroll.setPower(1);
+        }
+        else if (gamepad2.dpad_right){
+            robot.Lroll.setPower(-1);
+            robot.Rroll.setPower(-1);
+        }
+        else {
+            robot.Lroll.setPower(0);
+            robot.Rroll.setPower(0);
+        }
+        if (gamepad2.dpad_up) {
+            robot.Lrope.setPower(-0.5);
+            robot.Rrope.setPower(-0.5);
+        }
+        else if (gamepad2.dpad_down) {
+            robot.Lrope.setPower(0.5);
+            robot.Rrope.setPower(0.5);
+        }
+        else {
+            robot.Lrope.setPower(0);
+            robot.Rrope.setPower(0);
+        }
     }
 
     public void Relic_Ruler() {//not used
@@ -183,7 +201,7 @@ public class FTC2018_robot1_Manual extends OpMode{
        telemetry.addData("check",robot.tmp);
 
 //        robot.tmp = (robot.lifting.getPower()*0.7+g2leftStickY*0.1);
-        robot.lifting.setPower(robot.lifting.getPower()*0.7+g2leftStickY+0.1);
+        //robot.lifting.setPower(robot.lifting.getPower()*0.7+g2leftStickY+0.1);
         telemetry.addData("Power1",robot.lifting.getPower());
         telemetry.addData("LSYY",g2leftStickY);
 //        //robot.tmp = RoundDownDp(robot.tmp,0.001);
@@ -202,15 +220,17 @@ public class FTC2018_robot1_Manual extends OpMode{
         telemetry.addData("robot.tmp",robot.tmp);
         telemetry.addData("Power",robot.lifting.getPower());
 
-        if (gamepad2.x) {//open
-            robot.clipL1.setPosition(robot.clipL1open);
-        }
-        if (gamepad2.y) {//close
+        if (gamepad2.right_bumper) {//close
             robot.clipL1.setPosition(robot.clipL1close);
         }
-
-        if (g2rightStickY != 0) {robot.clipBL.setPosition(Range.clip(g2rightStickY+robot.clipStop,robot.clipDown,robot.clipUp));}
+        if (gamepad2.left_bumper) {//open
+            robot.clipL1.setPosition(robot.clipL1open);
+        }
+        robot.lifting.setPower(g2rightStickY*.8);
+        //robot.clipBL.setPosition(g2leftStickY);
+        if (g2leftStickY != 0) {robot.clipBL.setPosition(Range.clip(g2leftStickY+robot.clipStop,robot.clipDown,robot.clipUp));}
         else robot.clipBL.setPosition(0.5);
+
     }
 
     public double RoundDownDp(double value, double place){
@@ -275,14 +295,14 @@ public class FTC2018_robot1_Manual extends OpMode{
         //Relic_Arm();
 
         //Player2
-        //Relic_Z();
+        Relic_Z();
         Glyph_Roll();
         //Relic_Ruler();
-        double test = (int) robot.lifting.getPower()*84.99999+g2leftStickY*15;
+        /*double test = (int) robot.lifting.getPower()*84.99999+g2leftStickY*15;
         robot.lifting.setPower(test/100);
         telemetry.addData("Power1",robot.lifting.getPower());
 
-        telemetry.addData("gamepad2: ",!gamepad2.atRest());
+        telemetry.addData("gamepad2: ",!gamepad2.atRest());*/
         telemetry.update();
     }
 
