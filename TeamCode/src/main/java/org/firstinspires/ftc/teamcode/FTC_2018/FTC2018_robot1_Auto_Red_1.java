@@ -23,9 +23,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 import java.util.Set;
 
 
-@Autonomous(name="FTC2018_robot1_Auto_Red", group ="FTC 2018")
+@Autonomous(name="FTC2018_robot1_Auto_Red_1", group ="FTC 2018")
 
-public class FTC2018_robot1_Auto_Red extends LinearOpMode {
+public class FTC2018_robot1_Auto_Red_1 extends LinearOpMode {
 
     public static final String TAG = "Vuforia VuMark Sample";
 
@@ -33,7 +33,7 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
 
     VuforiaLocalizer vuforia;
 
-    final public double LocalSpeed = 0.2;
+    final public double LocalSpeed = 0.5;
 
     FTC2018_RobotInit_robot1 robot = new FTC2018_RobotInit_robot1();
 
@@ -55,14 +55,14 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
         robot.Rfront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.Lback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.Rback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.RArm.setPosition(robot.RArmOpen);
 
     }
     public void SetDistanceToGo(double DistanceInCm, double LocalPowerAll, int LfrontEncoder, int RfrontEncoder, int LbackEncoder, int RbackEncoder){
         //declare variable
-
         double DiameterOfWheel = 10;
         final double EncoderValue = 1680;
-        final double GearRatio = 2;
+        final double GearRatio = 1;
         final double Pi = Math.PI;
         double Circumference = DiameterOfWheel*Pi;
         double DistanceOfEachCircleOfMotor = Circumference*GearRatio;
@@ -72,6 +72,7 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
         int tmp = 0;
         ValueForEncoderTemp = ValueForEncoderFor1Cm*DistanceInCm;
         ValueForEncoder = (int) ValueForEncoderTemp;
+
         robot.Lfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.Rfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.Lback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -93,30 +94,29 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
         while (opModeIsActive() && robot.Lfront.isBusy() && robot.Rfront.isBusy() && robot.Lback.isBusy() && robot.Rback.isBusy()){
             telemetry.update();
         }
+
         robot.Lfront.setPower(0);
         robot.Rfront.setPower(0);
         robot.Lback.setPower(0);
         robot.Rback.setPower(0);
     }
     public void forward(double Distance){
-        SetDistanceToGo(Distance,LocalSpeed,-1,1,-1,1);
+        SetDistanceToGo(Distance,LocalSpeed,1,1,1,1);
     }
     public void backward(double Distance){
-        SetDistanceToGo(Distance,LocalSpeed,1,-1,1,-1);
+        SetDistanceToGo(Distance,LocalSpeed,-1,-1,-1,-1);
     }
     public void left(double Distance){
-        //double Distance2 = 0;
-        Distance = Distance/0.8;
-        SetDistanceToGo(Distance,LocalSpeed,1,1,-1,-1);
+        SetDistanceToGo(Distance,LocalSpeed,-1,1,-1,1);
     }
     public void right(double Distance){
-        //double Distance2 = 0;
-        Distance = Distance/0.80;
-        SetDistanceToGo(Distance,LocalSpeed,-1,-1,1,1);
+        SetDistanceToGo(Distance,LocalSpeed,1,-1,1,-1);
     }
     @Override public void runOpMode() {
         initial();
-        int check = 0;
+        String check = "Empty";
+        String team = "Red";
+        String jewel = "Blue";
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
@@ -134,97 +134,58 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
+
         relicTrackables.activate();
-        while (opModeIsActive() && check < 1) {
+
+        telemetry.addData("Status", "Scanning");
+        telemetry.update();
+
+        while (opModeIsActive() && check == "Empty") {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-            if (vuMark != RelicRecoveryVuMark.UNKNOWN) {
-
-                telemetry.addData("Result",vuMark);
-
-                if (vuMark != RelicRecoveryVuMark.CENTER){
-                    if (vuMark != RelicRecoveryVuMark.LEFT){
-                        check = 3;
-                    }
-                }
-                if (vuMark != RelicRecoveryVuMark.CENTER){
-                    if (vuMark != RelicRecoveryVuMark.RIGHT){
-                        check = 2;
-                    }
-                }
-                if (vuMark != RelicRecoveryVuMark.RIGHT){
-                    if (vuMark != RelicRecoveryVuMark.LEFT){
-                        check = 1;
-                    }
-                }
-                OpenGLMatrix pose = ((VuforiaTrackableDefaultListener)relicTemplate.getListener()).getPose();
-                telemetry.addData("Position", format(pose));
-
-                /*if (pose != null) {
-                    VectorF trans = pose.getTranslation();
-                    Orientation rot = Orientation.getOrientation(pose, AxesReference.EXTRINSIC, AxesOrder.XYZ, AngleUnit.DEGREES);
-
-                    double tX = trans.get(0);
-                    double tY = trans.get(1);
-                    double tZ = trans.get(2);
-
-                    double rX = rot.firstAngle;
-                    double rY = rot.secondAngle;
-                    double rZ = rot.thirdAngle;
-
-                    String pX="",pY="";
-                    if (tX == 0) pX = "Center";
-                    else if (tX > 0) pX = "Left";
-                    else if (tX < 0) pX = "Right";
-
-                    if (tY == 0) pY = "Center";
-                    else if (tY > 0) pY = "Down";
-                    else if (tY < 0) pY = "Up";
-
-                    telemetry.addData("X-Coordinate","%.2f %s",tX,pX);
-                    telemetry.addData("Y-Coordinate","%.2f %s",tY,pY);
-                    telemetry.addData("Z-Coordinate","%.2f",tZ);
-                }*/
-            }
-            else {
-                telemetry.addData("Result", "not visible");
-            }
-
+            if (vuMark == RelicRecoveryVuMark.CENTER) check = "Center";
+            else if (vuMark == RelicRecoveryVuMark.LEFT) check = "Left";
+            else if (vuMark == RelicRecoveryVuMark.RIGHT) check = "Right";
+            telemetry.addData("Result", vuMark);
             telemetry.update();
         }
-        telemetry.addData("Check",check);
+
+        OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
+
+        telemetry.addData("Check", check);
         telemetry.update();
-        while (opModeIsActive()){
-            telemetry.addData("Lfront",robot.Lfront.getCurrentPosition());
-            telemetry.addData("Lback",robot.Lback.getCurrentPosition());
-            telemetry.addData("Rfront",robot.Rfront.getCurrentPosition());
-            telemetry.addData("Rback",robot.Rback.getCurrentPosition());
+
+        if (team == "Red") {
+            if (jewel == "Red") {
+                SetDistanceToGo(8,0.3,1,-1,1,-1);
+                robot.RArm.setPosition(robot.RArmClose);
+                SetDistanceToGo(8,0.3,-1,1,-1,1);
+            }
+            else if (jewel == "Blue") {
+                SetDistanceToGo(8,0.3,-1,1,-1,1);
+                SetDistanceToGo(8,0.3,1,-1,1,-1);
+            }
         }
-        if (check == 3 ){           //right
+
+        sleep(3000);
+
+        if (check == "Center") {           //centre
             forward(60);
             left(30);
+            forward(60);
         }
-        if (check == 2 ){           //left
+        else if (check == "Right") {           //right
+            forward(60);
+            sleep(200);
+            backward(20);
+        }
+        else if (check == "Left") {           //left
             forward(60);
             right(30);
         }
-        if (check == 1 ){           //centre
+        else {           //unknown
             forward(60);
-            left(30);
-            forward(60);
-        }
-        if (check == 0 ){           //unknown
-            forward(60);
-            left(60);
-            backward(60);
+            sleep(200);
         }
         telemetry.update();
     }
-
-
-
-
-    String format(OpenGLMatrix transformationMatrix) {
-        return (transformationMatrix != null) ? transformationMatrix.formatAsTransform() : "null";
-    }
-
 }

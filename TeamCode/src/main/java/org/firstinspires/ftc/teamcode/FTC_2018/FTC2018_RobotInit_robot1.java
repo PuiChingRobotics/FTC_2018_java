@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.LightSensor;
+
 
 public class FTC2018_RobotInit_robot1 {
 
@@ -12,8 +14,10 @@ public class FTC2018_RobotInit_robot1 {
     public Servo clipR0;
     public Servo clipR1;
 
-    public Servo clipBL;
-    public Servo clipBR;
+    public Servo LArm;
+    public Servo RArm;
+
+    public LightSensor ColourSensorL;
 
     public DcMotor rope;
     public DcMotor lifting;
@@ -38,16 +42,16 @@ public class FTC2018_RobotInit_robot1 {
     public final double clipL0close = 0;
     public final double clipR0close = 1;
 
-    public final double clipL1open = 0.8;
+    public final double clipL1open = 0.2;
     public final double clipR1open = 0.4;
-    public final double clipL1close = 0;
+    public final double clipL1close = 0.8;
     public final double clipR1close = 1;
 
-    public final double clipBLopen = 0.1;
-    public final double clipBLclose = 0;
+    public final double LArmOpen = 1;
+    public final double LArmClose = 0;
     public final double clipBLfullopen = 1;
-    public final double clipBRopen = 0.9;
-    public final double clipBRclose = 1;
+    public final double RArmOpen = 0.1;
+    public final double RArmClose = 1;
     public final double clipBRfullopen = 0;
 
     public double Lfronttmp = 0;
@@ -61,7 +65,7 @@ public class FTC2018_RobotInit_robot1 {
     public double Rbackforward = 0;
 
     public double tmp;
-//
+    //
     public HardwareMap _hw;
 
     public void init(HardwareMap hw){
@@ -72,8 +76,8 @@ public class FTC2018_RobotInit_robot1 {
         clipL1 = _hw.servo.get("clipL1");
         clipR1 = _hw.servo.get("clipR1");
 
-        clipBL = _hw.servo.get("clipBL");   //unuesd
-        clipBR = _hw.servo.get("clipBR");   //unuesd
+        LArm = _hw.servo.get("LArm");   //unuesd
+        RArm = _hw.servo.get("RArm");   //unuesd
 
         rope = _hw.dcMotor.get("rope");
         lifting = _hw.dcMotor.get("lifting");
@@ -89,10 +93,12 @@ public class FTC2018_RobotInit_robot1 {
         Lback = _hw.dcMotor.get("Lback");
         Rback = _hw.dcMotor.get("Rback");
 
+        ColourSensorL = _hw.lightSensor.get("ColourSensorL");
+
         Rfront.setDirection(DcMotorSimple.Direction.REVERSE);
         Rback.setDirection(DcMotorSimple.Direction.REVERSE);
         Rrope.setDirection(DcMotorSimple.Direction.REVERSE);
-        Lroll.setDirection(DcMotorSimple.Direction.REVERSE);
+        Rroll.setDirection(DcMotorSimple.Direction.REVERSE);
         rope.setDirection(DcMotorSimple.Direction.REVERSE);
 
     }
