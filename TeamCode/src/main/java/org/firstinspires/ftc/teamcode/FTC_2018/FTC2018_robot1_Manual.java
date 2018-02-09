@@ -26,11 +26,12 @@ public class FTC2018_robot1_Manual extends OpMode{
         robot.Rrope.setPower(0);
 
         robot.ColourSensorL.enableLed(true);
+        //robot.ColourSensorTest.enableLed(true);
 
         // robot.clipL0.setPosition(0.6);
         // robot.clipR0.setPosition(0.4);
 
-        // robot.LArm.setPosition(robot.clipBLopen);
+        // robot.ArmBaseosition(robot.clipBLopen);
         // robot.RArm.setPosition(robot.clipBRopen);
 
     }
@@ -59,12 +60,10 @@ public class FTC2018_robot1_Manual extends OpMode{
 
         if (gamepad1.x) {//open
             robot.clipL1.setPosition(robot.clipL1open);
-            robot.clipR1.setPosition(robot.clipR1open);
-        }
+            robot.clipSpare.setPosition(robot.clipSpareopen);}
         if (gamepad1.y) {//close
             robot.clipL1.setPosition(robot.clipL1close);
-            robot.clipR1.setPosition(robot.clipR1close);
-        }
+            robot.clipSpare.setPosition(robot.clipSpareclose);}
 
         if (gamepad1.dpad_up == true) {
             robot.Lrope.setPower(1);
@@ -133,16 +132,16 @@ public class FTC2018_robot1_Manual extends OpMode{
 
     public void Relic_Ruler() {//not used
         if (gamepad2.a) {//close
-            robot.LArm.setPosition(robot.LArmClose);
-            robot.RArm.setPosition(robot.RArmClose);
+            robot.ArmBase.setPosition(robot.ArmBaseCentre);
+            robot.ArmTop.setPosition(robot.ArmTopOpen);
         }
         else if (gamepad2.b) {//open
-            robot.LArm.setPosition(robot.LArmOpen);
-            robot.RArm.setPosition(robot.RArmOpen);
+            robot.ArmBase.setPosition(robot.ArmBaseCentre);
+            robot.ArmTop.setPosition(robot.ArmTopClose);
         }
         else if (gamepad2.x) {//fully open
-            robot.LArm.setPosition(robot.clipBLfullopen);
-            robot.RArm.setPosition(robot.clipBRfullopen);
+            robot.ArmBase.setPosition(robot.clipBLfullopen);
+            robot.ArmTop.setPosition(robot.clipBRfullopen);
         }
 
         robot.Lrope.setPower(-gamepad2.left_stick_y);
@@ -238,10 +237,13 @@ public class FTC2018_robot1_Manual extends OpMode{
     }
     public void Jewel(){
         if (gamepad1.left_stick_button){
-            robot.RArm.setPosition(robot.RArmOpen);
+            robot.ArmBase.setPosition(robot.ArmBaseForward);
         }
         else if (gamepad1.right_stick_button){
-            robot.RArm.setPosition(robot.RArmClose);
+            robot.ArmBase.setPosition(robot.ArmBaseBackward);
+        }
+        else if (gamepad1.start){
+            robot.ArmBase.setPosition(robot.ArmBaseCentre);
         }
     }
 
@@ -296,9 +298,11 @@ public class FTC2018_robot1_Manual extends OpMode{
         telemetry.addData("Lbacktmp: ",robot.Lbacktmp);
         telemetry.addData("Rbacktmp: ",robot.Rbacktmp);
 
-        telemetry.addData("RArm: ",robot.RArm.getPosition());
+        telemetry.addData("ArmBase: ",robot.ArmBase.getPosition());
+        telemetry.addData("ArmTop: ",robot.ArmTop.getPosition());
 
         telemetry.addData("LSensor: ",robot.ColourSensorL.getLightDetected());
+        //telemetry.addData("SensorTest: ",robot.ColourSensorTest.argb());
 
         //Player1
         //Glyph_DoubleClip();

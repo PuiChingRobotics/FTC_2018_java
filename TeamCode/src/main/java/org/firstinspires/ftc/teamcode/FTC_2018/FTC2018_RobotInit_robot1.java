@@ -12,12 +12,13 @@ public class FTC2018_RobotInit_robot1 {
     public Servo clipL0;
     public Servo clipL1;
     public Servo clipR0;
-    public Servo clipR1;
+    public Servo clipSpare;
 
-    public Servo LArm;
-    public Servo RArm;
+    public Servo ArmBase;
+    public Servo ArmTop;
 
     public LightSensor ColourSensorL;
+    //public ColorSensor ColourSensorTest;
 
     public DcMotor rope;
     public DcMotor lifting;
@@ -43,16 +44,18 @@ public class FTC2018_RobotInit_robot1 {
     public final double clipR0close = 1;
 
     public final double clipL1open = 0.2;
-    public final double clipR1open = 0.4;
+    public final double clipSpareopen = 0.4;
     public final double clipL1close = 0.8;
-    public final double clipR1close = 1;
+    public final double clipSpareclose = 1;
 
-    public final double LArmOpen = 1;
-    public final double LArmClose = 0;
-    public final double clipBLfullopen = 1;
-    public final double RArmOpen = 0.1;
-    public final double RArmClose = 1;
+    public final double ArmBaseBackward = 0.6;
+    public final double ArmBaseCentre = 0.5;
+    public final double ArmBaseForward = 0.4;
+    public final double ArmTopOpen = 0.95;
+    public final double ArmTopClose = 0;
+
     public final double clipBRfullopen = 0;
+    public final double clipBLfullopen = 1;
 
     public double Lfronttmp = 0;
     public double Lbacktmp = 0;
@@ -65,7 +68,7 @@ public class FTC2018_RobotInit_robot1 {
     public double Rbackforward = 0;
 
     public double tmp;
-    //
+
     public HardwareMap _hw;
 
     public void init(HardwareMap hw){
@@ -74,10 +77,10 @@ public class FTC2018_RobotInit_robot1 {
         clipL0 = _hw.servo.get("clipL0");
         clipR0 = _hw.servo.get("clipR0");
         clipL1 = _hw.servo.get("clipL1");
-        clipR1 = _hw.servo.get("clipR1");
+        clipSpare = _hw.servo.get("clipSpare");
 
-        LArm = _hw.servo.get("LArm");   //unuesd
-        RArm = _hw.servo.get("RArm");   //unuesd
+        ArmBase = _hw.servo.get("ArmBase");   //unuesd
+        ArmTop = _hw.servo.get("ArmTop");   //unuesd
 
         rope = _hw.dcMotor.get("rope");
         lifting = _hw.dcMotor.get("lifting");
@@ -100,7 +103,32 @@ public class FTC2018_RobotInit_robot1 {
         Rrope.setDirection(DcMotorSimple.Direction.REVERSE);
         Rroll.setDirection(DcMotorSimple.Direction.REVERSE);
         rope.setDirection(DcMotorSimple.Direction.REVERSE);
-
     }
 
+    public void runModeSet(String mode) {
+        if (mode == "position") {
+            Lfront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            Lback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            Rfront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            Rback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
+        else if (mode == "reset") {
+            Lfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            Lback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            Rfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            Rback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        }
+        else if (mode == "tele") {
+            Lfront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            Lback.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            Rfront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            Rback.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        }
+        else if (mode == "encoder") {
+            Lfront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            Lback.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            Rfront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            Rback.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+    }
 }
