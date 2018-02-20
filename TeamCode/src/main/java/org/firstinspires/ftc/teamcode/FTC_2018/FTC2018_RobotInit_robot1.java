@@ -18,7 +18,7 @@ public class FTC2018_RobotInit_robot1 {
     public Servo ArmTop;
 
     public LightSensor ColourSensorL;
-    //public ColorSensor ColourSensorTest;
+    public LightSensor ColourSensorR;
 
     public DcMotor rope;
     public DcMotor lifting;
@@ -48,11 +48,19 @@ public class FTC2018_RobotInit_robot1 {
     public final double clipL1close = 0.8;
     public final double clipSpareclose = 1;
 
-    public final double ArmBaseBackward = 0.6;
-    public final double ArmBaseCentre = 0.5;
-    public final double ArmBaseForward = 0.4;
-    public final double ArmTopOpen = 0.95;
-    public final double ArmTopClose = 0;
+    public final double ArmBaseBackwardBlue = 0.7;
+    public final double ArmBaseCentreBlue = 0.5;
+    public final double ArmBaseForwardBlue = 0.3;
+    public final double ArmTopOpen1Blue = 0.9;
+    public final double ArmTopOpen2Blue = 0.95;
+    public final double ArmTopCloseBlue = 0.2;
+
+    public final double ArmBaseBackwardRed = 0.3;
+    public final double ArmBaseCentreRed = 0.48;
+    public final double ArmBaseForwardRed = 0.7;
+    public final double ArmTopOpen1Red = 0.2;
+    public final double ArmTopOpen2Red = 0.02;
+    public final double ArmTopCloseRed = 0.8;
 
     public final double clipBRfullopen = 0;
     public final double clipBLfullopen = 1;
@@ -66,6 +74,9 @@ public class FTC2018_RobotInit_robot1 {
     public double Lbackforward = 0;
     public double Rfrontforward = 0;
     public double Rbackforward = 0;
+
+    public double turning90 = 36;
+    public double turning180 = 48;
 
     public double tmp;
 
@@ -97,12 +108,14 @@ public class FTC2018_RobotInit_robot1 {
         Rback = _hw.dcMotor.get("Rback");
 
         ColourSensorL = _hw.lightSensor.get("ColourSensorL");
+        ColourSensorR = _hw.lightSensor.get("ColourSensorR");
 
         Rfront.setDirection(DcMotorSimple.Direction.REVERSE);
         Rback.setDirection(DcMotorSimple.Direction.REVERSE);
         Rrope.setDirection(DcMotorSimple.Direction.REVERSE);
         Rroll.setDirection(DcMotorSimple.Direction.REVERSE);
         rope.setDirection(DcMotorSimple.Direction.REVERSE);
+        lifting.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     public void runModeSet(String mode) {
