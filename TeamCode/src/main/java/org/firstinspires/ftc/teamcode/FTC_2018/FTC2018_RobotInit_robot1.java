@@ -48,18 +48,18 @@ public class FTC2018_RobotInit_robot1 {
     public final double clipL1close = 0.8;
     public final double clipSpareclose = 1;
 
-    public final double ArmBaseBackwardBlue = 0.7;
+    public final double ArmBaseBackwardBlue = 0.8;
     public final double ArmBaseCentreBlue = 0.5;
-    public final double ArmBaseForwardBlue = 0.3;
+    public final double ArmBaseForwardBlue = 0.2;
     public final double ArmTopOpen1Blue = 0.9;
     public final double ArmTopOpen2Blue = 0.92;
     public final double ArmTopCloseBlue = 0.2;
 
-    public final double ArmBaseBackwardRed = 0.3;
-    public final double ArmBaseCentreRed = 0.48;
-    public final double ArmBaseForwardRed = 0.7;
-    public final double ArmTopOpen1Red = 0.2;
-    public final double ArmTopOpen2Red = 0.02;
+    public final double ArmBaseBackwardRed = 0.2;
+    public final double ArmBaseCentreRed = 0.45;
+    public final double ArmBaseForwardRed = 0.8;
+    public final double ArmTopOpen1Red = 0.1;
+    public final double ArmTopOpen2Red = 0.05;
     public final double ArmTopCloseRed = 0.8;
 
     public final double JewelBlueUpper = 0.245;

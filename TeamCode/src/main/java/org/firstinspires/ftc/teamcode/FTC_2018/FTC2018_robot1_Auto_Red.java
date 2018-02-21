@@ -22,7 +22,7 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
 
     VuforiaLocalizer vuforia;
 
-    final public double LocalSpeed = 0.3;
+    final public double LocalSpeed = 0.5;
     String jewel = "Empty";
     String image = "Empty";
     String team = "Red";
@@ -46,8 +46,7 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
         robot.ArmBase.setPosition(robot.ArmBaseCentreRed);
         robot.ArmTop.setPosition(robot.ArmTopCloseRed);
 
-        robot.ColourSensorL.enableLed(true);
-
+        robot.ColourSensorR.enableLed(true);
         robot.clipL0.setPosition(0);//0.1
         robot.clipR0.setPosition(1);//0.9
     }
@@ -108,15 +107,15 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
     }
 
     public void Kick_Jewel() {
-        data = robot.ColourSensorL.getLightDetected();
+        data = robot.ColourSensorR.getLightDetected();
         if (robot.JewelRedLower < data && data < robot.JewelRedUpper){
             jewel = "Red";
         }
-        else if (robot.JewelRedUpper <= data && data <= robot.JewelRedLower) {//over-lapped data
+        else if (robot.JewelBlueUpper <= data && data <= robot.JewelRedLower) {//over-lapped data
             jewel = "Over-lapped";
         }
-        else if (robot.JewelRedLower < data && data < robot.JewelRedUpper){
-            jewel = "Red";
+        else if (robot.JewelBlueLower < data && data < robot.JewelBlueUpper){
+            jewel = "Blue";
         }
 
         telemetry.addData("Image",image);
@@ -124,13 +123,13 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
         telemetry.addData("SensorValue",data);
         telemetry.update();
 
-        if (jewel == "Red") {
+        if (jewel == "Blue") {
             robot.ArmBase.setPosition(robot.ArmBaseBackwardRed);
-            sleep(300);
+            sleep(500);
         }
         else if (jewel == "Red") {
             robot.ArmBase.setPosition(robot.ArmBaseForwardRed);
-            sleep(300);
+            sleep(500);
         }
 
         robot.ArmTop.setPosition(robot.ArmTopCloseRed);
@@ -145,107 +144,101 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
     }
 
     public void Glyph_Red1() {
-        backward(45);
+        backward(55);
         sleep(500);
-        forward(5);
-        sleep(300);
+        forward(15);
+        sleep(500);
+        backward(13);
 
-        left(robot.turning90);
-        sleep(300);
+        right(robot.turning90);
+        sleep(500);
 
 
         if (image == "Left") {//Left
-            forward(12);
-            sleep(300);
+            forward(43);
+            sleep(500);
         }
         else if (image == "Centre") {//Centre
             forward(28);
-            sleep(300);
+            sleep(500);
         }
         else if (image == "Right") {//Right
-            forward(43);
-            sleep(300);
+            forward(12);
+            sleep(500);
         }
         else {//Not found
             forward(30);
-            sleep(300);
+            sleep(500);
         }
 
-        left(robot.turning90+5);
-        sleep(300);
-
+        right(robot.turning90-5);
+        sleep(500);
+        forward(5);
         long EndTimeRoll = System.currentTimeMillis()+800;
         while (System.currentTimeMillis() < EndTimeRoll) {
-            robot.Lroll.setPower(-0.5);
-            robot.Rroll.setPower(-0.5);
+            robot.Lroll.setPower(-1);
+            robot.Rroll.setPower(-1);
             telemetry.update();
         }
         robot.Lroll.setPower(0);
         robot.Rroll.setPower(0);
-        sleep(300);
+        sleep(500);
 
         robot.clipL0.setPosition(0.6);
         robot.clipR0.setPosition(0.4);
-        sleep(300);
+        sleep(500);
         forward(20);
-        sleep(300);
+        sleep(500);
         backward(15);
-        sleep(300);
-
-        right(robot.turning180); //ready to go out
-        sleep(300);
-        backward(10);
-        sleep(300);
+        sleep(500);
     }
 
     public void Glyph_Red2() {
-        backward(45);
+
+        backward(55);
         sleep(500);
-        forward(5);
-        sleep(300);
+        forward(13);
+        sleep(500);
 
         if (image == "Left") {//Left
-            backward(45);
-            sleep(300);
+            backward(50);
+            sleep(500);
         }
         else if (image == "Centre") {//Centre
-            backward(60);
-            sleep(300);
+            backward(35);
+            sleep(500);
         }
         else if (image == "Right") {//Right
-            backward(75);
-            sleep(300);
+            backward(20);
+            sleep(500);
         }
         else {//Not found
-            backward(60);
-            sleep(300);
+            backward(35);
+            sleep(500);
         }
 
-        right(robot.turning90);
-        sleep(300);
+        left(35);
+        sleep(500);
+        forward(15);
+        sleep(500);
 
         long EndTimeRoll = System.currentTimeMillis()+800;
         while (System.currentTimeMillis() < EndTimeRoll) {
-            robot.Lroll.setPower(-0.5);
-            robot.Rroll.setPower(-0.5);
+            robot.Lroll.setPower(-1);
+            robot.Rroll.setPower(-1);
             telemetry.update();
         }
         robot.Lroll.setPower(0);
         robot.Rroll.setPower(0);
-        sleep(300);
+        sleep(500);
 
         robot.clipL0.setPosition(0.6);
         robot.clipR0.setPosition(0.4);
-        sleep(300);
+        sleep(500);
         forward(20);
-        sleep(300);
+        sleep(500);
         backward(15);
-        sleep(300);
-
-        right(robot.turning180); //ready to go out
-        sleep(300);
-        backward(10);
-        sleep(300);
+        sleep(500);
     }
 
     public void Place_Glyph() {
@@ -274,8 +267,8 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
         VuforiaTrackables relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
         VuforiaTrackable relicTemplate = relicTrackables.get(0);
         relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
-
         telemetry.addData("Status", "Camera is ready");
+
         telemetry.update();
 
         waitForStart();
@@ -294,8 +287,8 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
             else if (vuMark == RelicRecoveryVuMark.LEFT) image = "Left";
             else if (vuMark == RelicRecoveryVuMark.RIGHT) image = "Right";
             else image = "Not found";
-            robot.Lroll.setPower(0.5);
-            robot.Rroll.setPower(0.5);
+            robot.Lroll.setPower(1);
+            robot.Rroll.setPower(1);
             telemetry.addData("Result", vuMark);
             telemetry.update();
         }
@@ -304,6 +297,10 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
         robot.Lroll.setPower(0);
         robot.Rroll.setPower(0);
         sleep(500);
+        RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+        if (vuMark == RelicRecoveryVuMark.CENTER) image = "Center";
+        else if (vuMark == RelicRecoveryVuMark.LEFT) image = "Left";
+        else if (vuMark == RelicRecoveryVuMark.RIGHT) image = "Right";
 
         OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
 

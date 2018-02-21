@@ -26,7 +26,7 @@ public class FTC2018_robot1_Auto_Blue extends LinearOpMode {
     String jewel = "Empty";
     String image = "Empty";
     String team = "Blue";
-    String alliance = "2";
+    String alliance = "1";
     double data = 0;
 
 
@@ -176,8 +176,8 @@ public class FTC2018_robot1_Auto_Blue extends LinearOpMode {
 
         long EndTimeRoll = System.currentTimeMillis()+800;
         while (System.currentTimeMillis() < EndTimeRoll) {
-            robot.Lroll.setPower(-0.5);
-            robot.Rroll.setPower(-0.5);
+            robot.Lroll.setPower(-1);
+            robot.Rroll.setPower(-1);
             telemetry.update();
         }
         robot.Lroll.setPower(0);
@@ -190,12 +190,7 @@ public class FTC2018_robot1_Auto_Blue extends LinearOpMode {
         forward(20);
         sleep(300);
         backward(15);
-        sleep(300);
-
-        right(robot.turning180); //ready to go out
-        sleep(300);
-        backward(10);
-        sleep(300);
+        sleep(500);
     }
 
     public void Glyph_Blue2() {
@@ -226,8 +221,8 @@ public class FTC2018_robot1_Auto_Blue extends LinearOpMode {
 
         long EndTimeRoll = System.currentTimeMillis()+800;
         while (System.currentTimeMillis() < EndTimeRoll) {
-            robot.Lroll.setPower(-0.5);
-            robot.Rroll.setPower(-0.5);
+            robot.Lroll.setPower(-1);
+            robot.Rroll.setPower(-1);
             telemetry.update();
         }
         robot.Lroll.setPower(0);
@@ -240,12 +235,7 @@ public class FTC2018_robot1_Auto_Blue extends LinearOpMode {
         forward(20);
         sleep(300);
         backward(15);
-        sleep(300);
-
-        right(robot.turning180); //ready to go out
-        sleep(300);
-        backward(10);
-        sleep(300);
+        sleep(500);
     }
 
     public void Place_Glyph() {
@@ -294,8 +284,8 @@ public class FTC2018_robot1_Auto_Blue extends LinearOpMode {
             else if (vuMark == RelicRecoveryVuMark.LEFT) image = "Left";
             else if (vuMark == RelicRecoveryVuMark.RIGHT) image = "Right";
             else image = "Not found";
-            robot.Lroll.setPower(0.5);
-            robot.Rroll.setPower(0.5);
+            robot.Lroll.setPower(1);
+            robot.Rroll.setPower(1);
             telemetry.addData("Result", vuMark);
             telemetry.update();
         }
@@ -304,6 +294,10 @@ public class FTC2018_robot1_Auto_Blue extends LinearOpMode {
         robot.Lroll.setPower(0);
         robot.Rroll.setPower(0);
         sleep(500);
+        RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+        if (vuMark == RelicRecoveryVuMark.CENTER) image = "Center";
+        else if (vuMark == RelicRecoveryVuMark.LEFT) image = "Left";
+        else if (vuMark == RelicRecoveryVuMark.RIGHT) image = "Right";
 
         OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
 

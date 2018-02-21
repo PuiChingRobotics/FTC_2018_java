@@ -32,8 +32,8 @@ public class FTC2018_robot1_Manual extends OpMode{
         robot.ColourSensorL.enableLed(true);
         robot.ColourSensorR.enableLed(true);
 
-        robot.ArmBase.setPosition(robot.ArmBaseCentreBlue);
-        robot.ArmTop.setPosition(robot.ArmTopCloseBlue);
+        robot.ArmBase.setPosition(robot.ArmBaseCentreRed);
+        robot.ArmTop.setPosition(robot.ArmTopCloseRed);
 
     }
 
@@ -255,18 +255,6 @@ public class FTC2018_robot1_Manual extends OpMode{
         return result;
     }
 
-    public void Jewel(){
-        if (gamepad1.left_stick_button){
-            robot.ArmBase.setPosition(robot.ArmBaseForwardRed);
-        }
-        else if (gamepad1.right_stick_button){
-            robot.ArmBase.setPosition(robot.ArmBaseBackwardRed);
-        }
-        else if (gamepad1.start){
-            robot.ArmBase.setPosition(robot.ArmBaseCentreRed);
-        }
-    }
-
     @Override
     public void loop(){
 
@@ -324,12 +312,13 @@ public class FTC2018_robot1_Manual extends OpMode{
         telemetry.addData("RSensor: ",robot.ColourSensorR.getLightDetected());
 
         if (gamepad1.back) {
-            robot.ArmBase.setPosition(robot.ArmBaseCentreBlue);
-            robot.ArmTop.setPosition(robot.ArmTopCloseBlue);
+            robot.ArmBase.setPosition(robot.ArmBaseCentreRed);
+            robot.ArmTop.setPosition(robot.ArmTopCloseRed);
         }
 
         if (gamepad2.back) {
-            robot.clipL1.setPosition(0);
+            robot.ArmBase.setPosition(robot.ArmBaseCentreBlue);
+            robot.ArmTop.setPosition(robot.ArmTopCloseBlue);
         }
 
         if (gamepad1.right_trigger > 0) {
@@ -353,8 +342,7 @@ public class FTC2018_robot1_Manual extends OpMode{
         //Glyph_RobotIn30Hours();
         //Relic_Z();
         Glyph_Roll();
-        //Relic_Ruler();
-        //Jewel();
+        //Relic_Ruler();\
         telemetry.update();
     }
 
