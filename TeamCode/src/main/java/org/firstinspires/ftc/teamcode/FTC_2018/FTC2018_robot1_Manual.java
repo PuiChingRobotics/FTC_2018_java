@@ -32,8 +32,8 @@ public class FTC2018_robot1_Manual extends OpMode{
         robot.ColourSensorL.enableLed(true);
         robot.ColourSensorR.enableLed(true);
 
-        robot.ArmBase.setPosition(robot.ArmBaseCentreRed);
-        robot.ArmTop.setPosition(robot.ArmTopCloseRed);
+        //robot.ArmBase.setPosition(robot.ArmBaseCentreRed);
+        //robot.ArmTop.setPosition(robot.ArmTopCloseRed);
 
     }
 
@@ -119,6 +119,14 @@ public class FTC2018_robot1_Manual extends OpMode{
     }
 
     public void Glyph_Roll() {
+        double leftStickX = gamepad1.left_stick_x;
+        double leftStickY = -gamepad1.left_stick_y;
+        double rightStickX = gamepad1.right_stick_x;
+        double rightStickY = -gamepad1.right_stick_y;
+        double g2leftStickX = gamepad2.left_stick_x;
+        double g2leftStickY = -gamepad2.left_stick_y;
+        double g2rightStickX = gamepad2.right_stick_x;
+        double g2rightStickY = -gamepad2.right_stick_y;
 
         if (gamepad2.a) {//open
             robot.clipL0.setPosition(0.6);//1
@@ -137,7 +145,13 @@ public class FTC2018_robot1_Manual extends OpMode{
             robot.clipR0.setPosition(0);
         }
 
-        if (gamepad2.dpad_right){//In
+        robot.Rroll.setPower(g2rightStickX);
+        robot.Lroll.setPower(g2rightStickX);
+
+        robot.Lrope.setPower(-g2leftStickY);
+        robot.Rrope.setPower(-g2leftStickY);
+
+        /*if (gamepad2.dpad_right){//In
             robot.Lroll.setPower(1);
             robot.Rroll.setPower(1);
         }
@@ -161,7 +175,7 @@ public class FTC2018_robot1_Manual extends OpMode{
         else {
             robot.Lrope.setPower(0);
             robot.Rrope.setPower(0);
-        }
+        }*/
     }
 
     public void Relic_Ruler() {//not used
@@ -279,10 +293,10 @@ public class FTC2018_robot1_Manual extends OpMode{
         robot.Lbackforward = RoundDownDp(robot.Lbackforward*speed_old+leftStickY*speed_new,0.001);
         robot.Rbackforward = RoundDownDp(robot.Rbackforward*speed_old+leftStickY*speed_new,0.001);
 
-        robot.Lfronttmp = RoundDownDp(robot.Lfrontforward*0.6+leftStickX*0.8+rightStickX*0.5,0.001);
-        robot.Rfronttmp = RoundDownDp(robot.Rfrontforward*0.6-leftStickX*0.8-rightStickX*0.5,0.001);
-        robot.Lbacktmp = RoundDownDp(robot.Lbackforward*0.6-leftStickX*0.8+rightStickX*0.5,0.001);
-        robot.Rbacktmp = RoundDownDp(robot.Rbackforward*0.6+leftStickX*0.8-rightStickX*0.5,0.001);
+        robot.Lfronttmp = RoundDownDp(robot.Lfrontforward*0.7+leftStickX*1+rightStickX*0.7,0.001);
+        robot.Rfronttmp = RoundDownDp(robot.Rfrontforward*0.7-leftStickX*1-rightStickX*0.7,0.001);
+        robot.Lbacktmp = RoundDownDp(robot.Lbackforward*0.7-leftStickX*1+rightStickX*0.7,0.001);
+        robot.Rbacktmp = RoundDownDp(robot.Rbackforward*0.7+leftStickX*1-rightStickX*0.7,0.001);
 
         robot.Lfront.setPower(robot.Lfronttmp);
         robot.Lback.setPower(robot.Lbacktmp);

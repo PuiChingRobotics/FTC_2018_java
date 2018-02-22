@@ -56,13 +56,13 @@ public class FTC2018_RobotInit_robot1 {
     public final double ArmTopCloseBlue = 0.2;
 
     public final double ArmBaseBackwardRed = 0.2;
-    public final double ArmBaseCentreRed = 0.45;
+    public final double ArmBaseCentreRed = 0.46;
     public final double ArmBaseForwardRed = 0.8;
     public final double ArmTopOpen1Red = 0.1;
     public final double ArmTopOpen2Red = 0.05;
     public final double ArmTopCloseRed = 0.8;
 
-    public final double JewelBlueUpper = 0.245;
+    public final double JewelBlueUpper = 0.25;
     public final double JewelBlueLower = 0.1;
     public final double JewelRedUpper = 0.5;
     public final double JewelRedLower = 0.275;

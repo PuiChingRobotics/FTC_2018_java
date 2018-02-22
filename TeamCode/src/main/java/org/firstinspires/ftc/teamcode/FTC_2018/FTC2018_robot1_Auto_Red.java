@@ -26,7 +26,7 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
     String jewel = "Empty";
     String image = "Empty";
     String team = "Red";
-    String alliance = "2";
+    String alliance = "1";
     double data = 0;
 
 
@@ -88,22 +88,25 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
         robot.Rback.setPower(0);
     }
 
-    public void forward(double Distance){
-
-        SetDistanceToGo(Distance,LocalSpeed,1,1,1,1);
-    }
-
-    public void backward(double Distance)
+    public void forward(double Distance, double Power)
     {
-        SetDistanceToGo(Distance,LocalSpeed,-1,-1,-1,-1);
+
+        SetDistanceToGo(Distance, Power,1,1,1,1);
     }
 
-    public void left(double Distance) {
-        SetDistanceToGo(Distance,LocalSpeed,-1,1,-1,1);
+    public void backward(double Distance, double Power)
+    {
+        SetDistanceToGo(Distance, Power,-1,-1,-1,-1);
     }
 
-    public void right(double Distance) {
-        SetDistanceToGo(Distance,LocalSpeed,1,-1,1,-1);
+    public void left(double Distance, double Power)
+    {
+        SetDistanceToGo(Distance, Power,-1,1,-1,1);
+    }
+
+    public void right(double Distance, double Power)
+    {
+        SetDistanceToGo(Distance, Power,1,-1,1,-1);
     }
 
     public void Kick_Jewel() {
@@ -131,6 +134,12 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
             robot.ArmBase.setPosition(robot.ArmBaseForwardRed);
             sleep(500);
         }
+        else {
+            robot.ArmTop.setPosition(0.2);
+            sleep(500);
+            robot.ArmBase.setPosition(0.8);
+            sleep(500);
+        }
 
         robot.ArmTop.setPosition(robot.ArmTopCloseRed);
         sleep(1000);
@@ -144,40 +153,40 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
     }
 
     public void Glyph_Red1() {
-        backward(55);
+        backward(50,0.4);
+        sleep(1000);
+        forward(15,LocalSpeed);
         sleep(500);
-        forward(15);
-        sleep(500);
-        backward(13);
+        backward(15,LocalSpeed);
 
-        right(robot.turning90);
+        right(33, LocalSpeed);
         sleep(500);
 
 
         if (image == "Left") {//Left
-            forward(43);
+            forward(45,LocalSpeed);
             sleep(500);
         }
         else if (image == "Centre") {//Centre
-            forward(28);
+            forward(30,LocalSpeed);
             sleep(500);
         }
         else if (image == "Right") {//Right
-            forward(12);
+            forward(15,LocalSpeed);
             sleep(500);
         }
         else {//Not found
-            forward(30);
+            forward(30,LocalSpeed);
             sleep(500);
         }
 
-        right(robot.turning90-5);
+        right(31,LocalSpeed);
         sleep(500);
-        forward(5);
+        forward(5,LocalSpeed);
         long EndTimeRoll = System.currentTimeMillis()+800;
         while (System.currentTimeMillis() < EndTimeRoll) {
-            robot.Lroll.setPower(-1);
-            robot.Rroll.setPower(-1);
+            robot.Lroll.setPower(-0.5);
+            robot.Rroll.setPower(-0.5);
             telemetry.update();
         }
         robot.Lroll.setPower(0);
@@ -187,45 +196,44 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
         robot.clipL0.setPosition(0.6);
         robot.clipR0.setPosition(0.4);
         sleep(500);
-        forward(20);
+        forward(20, LocalSpeed);
         sleep(500);
-        backward(15);
+        backward(15, LocalSpeed);
         sleep(500);
     }
 
     public void Glyph_Red2() {
-
-        backward(55);
-        sleep(500);
-        forward(13);
+        backward(50,0.4);
+        sleep(1000);
+        forward(15,LocalSpeed);
         sleep(500);
 
         if (image == "Left") {//Left
-            backward(50);
+            backward(50,LocalSpeed);
             sleep(500);
         }
         else if (image == "Centre") {//Centre
-            backward(35);
+            backward(35,LocalSpeed);
             sleep(500);
         }
         else if (image == "Right") {//Right
-            backward(20);
+            backward(20,LocalSpeed);
             sleep(500);
         }
         else {//Not found
-            backward(35);
+            backward(35,LocalSpeed);
             sleep(500);
         }
 
-        left(35);
+        left(33,LocalSpeed);
         sleep(500);
-        forward(15);
+        forward(15,LocalSpeed);
         sleep(500);
 
         long EndTimeRoll = System.currentTimeMillis()+800;
         while (System.currentTimeMillis() < EndTimeRoll) {
-            robot.Lroll.setPower(-1);
-            robot.Rroll.setPower(-1);
+            robot.Lroll.setPower(-0.5);
+            robot.Rroll.setPower(-0.5);
             telemetry.update();
         }
         robot.Lroll.setPower(0);
@@ -235,9 +243,9 @@ public class FTC2018_robot1_Auto_Red extends LinearOpMode {
         robot.clipL0.setPosition(0.6);
         robot.clipR0.setPosition(0.4);
         sleep(500);
-        forward(20);
+        forward(20,LocalSpeed);
         sleep(500);
-        backward(15);
+        backward(15,LocalSpeed);
         sleep(500);
     }
 
