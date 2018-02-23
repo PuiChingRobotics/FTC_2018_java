@@ -16,9 +16,6 @@ public class FTC2018_FinalBot_Manual extends OpMode{
         robot.Lback.setPower(0);
         robot.Rback.setPower(0);
 
-        /*robot.rope.setPower(0);
-        robot.lifting.setPower(0);*/
-
         robot.Lrope.setPower(0);
         robot.Rrope.setPower(0);
 

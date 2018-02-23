@@ -26,7 +26,7 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
     String jewel = "Empty";
     String image = "Empty";
     String team = "Red";
-    String alliance = "2";
+    String alliance = "1";
     double data = 0;
 
 

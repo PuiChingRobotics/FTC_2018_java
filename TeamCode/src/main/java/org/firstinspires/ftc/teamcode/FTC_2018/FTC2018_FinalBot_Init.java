@@ -89,9 +89,6 @@ public class FTC2018_FinalBot_Init {
         ArmBaseRed = _hw.servo.get("ArmBaseRed");
         ArmTopRed = _hw.servo.get("ArmTopRed");
 
-        /*rope = _hw.dcMotor.get("rope");
-        lifting = _hw.dcMotor.get("lifting");*/ //unused
-
         Lrope = _hw.dcMotor.get("Lrope");
         Rrope = _hw.dcMotor.get("Rrope");
 
