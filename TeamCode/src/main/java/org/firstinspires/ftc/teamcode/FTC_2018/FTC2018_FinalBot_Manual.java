@@ -147,8 +147,13 @@ public class FTC2018_FinalBot_Manual extends OpMode{
             robot.clipR.setPosition(0);
         }
 
-        robot.Rroll.setPower(g2leftStickX);
-        robot.Lroll.setPower(g2leftStickX);
+        robot.Rolltmp = g2leftStickX;
+        if (robot.Rolltmp < 0) {
+            robot.Rolltmp = robot.Rolltmp*0.7;
+        }
+
+        robot.Rroll.setPower(robot.Rolltmp);
+        robot.Lroll.setPower(robot.Rolltmp);
 
         robot.Lrope.setPower(-g2rightStickY);
         robot.Rrope.setPower(-g2rightStickY);
@@ -317,6 +322,16 @@ public class FTC2018_FinalBot_Manual extends OpMode{
             robot.ArmTopRed.setPosition(robot.ArmTopOpen1Red);
         }
 
+        if (Math.abs(gamepad2.right_stick_y) < 0.2) {
+            if (gamepad1.dpad_up) {
+                robot.Lrope.setPower(-1);
+                robot.Rrope.setPower(-1);
+            }
+            else if (gamepad1.dpad_down) {
+                robot.Lrope.setPower(1);
+                robot.Rrope.setPower(1);
+            }
+        }
 
         if (gamepad1.right_trigger > 0) {
             robot.Lfront.setPower(0.3);

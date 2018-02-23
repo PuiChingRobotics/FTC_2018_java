@@ -62,6 +62,9 @@ public class FTC2018_FinalBot_Init {
     public final double JewelRedUpper = 0.5;
     public final double JewelRedLower = 0.275;
 
+    public final double turning90 = 36;
+    public final double turning180 = 48;
+
     //Drive
     public double Lfronttmp = 0;
     public double Lbacktmp = 0;
@@ -73,8 +76,9 @@ public class FTC2018_FinalBot_Init {
     public double Rfrontforward = 0;
     public double Rbackforward = 0;
 
-    public double turning90 = 36;
-    public double turning180 = 48;
+    //Roll
+    public double Rolltmp = 0;
+
 
     public HardwareMap _hw;
 
@@ -107,8 +111,6 @@ public class FTC2018_FinalBot_Init {
         Rback.setDirection(DcMotorSimple.Direction.REVERSE);
         Rrope.setDirection(DcMotorSimple.Direction.REVERSE);
         Rroll.setDirection(DcMotorSimple.Direction.REVERSE);
-        /*rope.setDirection(DcMotorSimple.Direction.REVERSE);
-        lifting.setDirection(DcMotorSimple.Direction.REVERSE);*/
     }
 
     public void runModeSet(String mode) {
