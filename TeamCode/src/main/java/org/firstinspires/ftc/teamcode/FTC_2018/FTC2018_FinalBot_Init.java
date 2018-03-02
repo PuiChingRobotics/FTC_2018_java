@@ -137,6 +137,7 @@ public class FTC2018_FinalBot_Init {
             Lback.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             Rfront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             Rback.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //write something to push
         }
     }
 }

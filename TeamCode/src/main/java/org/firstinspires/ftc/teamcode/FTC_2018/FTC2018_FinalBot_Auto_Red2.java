@@ -12,9 +12,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefau
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 
-@Autonomous(name="FTC2018_FinalBot_Auto_Red", group ="FTC 2018")
+@Autonomous(name="FTC2018_FinalBot_Auto_Red2", group ="FTC 2018")
 
-public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
+public class FTC2018_FinalBot_Auto_Red2 extends LinearOpMode {
 
     public static final String TAG = "Vuforia VuMark Sample";
 

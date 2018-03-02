@@ -350,7 +350,7 @@ public class FTC2018_FinalBot_Manual extends OpMode{
             robot.Rfront.setPower(-0.3);
             robot.Rback.setPower(-0.3);
         }
-
+        //write something to push
         //Player1
         //Glyph_DoubleClip();
         //Relic_Arm();

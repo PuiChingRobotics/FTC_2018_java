@@ -12,9 +12,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefau
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 
-@Autonomous(name="FTC2018_FinalBot_Auto_Red", group ="FTC 2018")
+@Autonomous(name="FTC2018_FinalBot_Auto_Blue2", group ="FTC 2018")
 
-public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
+public class FTC2018_FinalBot_Auto_Blue2 extends LinearOpMode {
 
     public static final String TAG = "Vuforia VuMark Sample";
 
@@ -25,7 +25,7 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
     final public double LocalSpeed = 0.5;
     String jewel = "Empty";
     String image = "Empty";
-    String team = "Red";
+    String team = "Blue";
     String alliance = "2";
     double data = 0;
 
@@ -117,15 +117,15 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
     }
 
     public void Kick_Jewel() {
-        data = robot.ColourSensorRed.getLightDetected();
-        if (robot.JewelRedLower < data && data < robot.JewelRedUpper){
-            jewel = "Red";
+        data = robot.ColourSensorBlue.getLightDetected();
+        if (robot.JewelBlueLower < data && data < robot.JewelBlueUpper){
+            jewel = "Blue";
         }
         else if (robot.JewelBlueUpper <= data && data <= robot.JewelRedLower) {//over-lapped data
             jewel = "Over-lapped";
         }
-        else if (robot.JewelBlueLower < data && data < robot.JewelBlueUpper){
-            jewel = "Blue";
+        else if (robot.JewelRedLower < data && data < robot.JewelRedUpper){
+            jewel = "Red";
         }
 
         telemetry.addData("Image",image);
@@ -133,24 +133,29 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
         telemetry.addData("SensorValue",data);
         telemetry.update();
 
-        if (jewel == "Blue") {
-            robot.ArmBaseRed.setPosition(robot.ArmBaseBackwardRed);
+        if (jewel == "Red") {
+            robot.ArmBaseBlue.setPosition(robot.ArmBaseBackwardBlue);
             sleep(500);
+            robot.ArmTopBlue.setPosition(0.8);
+            sleep(500);
+            robot.ArmBaseBlue.setPosition(0.2);
+            sleep(500);
+
         }
-        else if (jewel == "Red") {
-            robot.ArmBaseRed.setPosition(robot.ArmBaseForwardRed);
+        else if (jewel == "Blue") {
+            robot.ArmBaseBlue.setPosition(robot.ArmBaseForwardBlue);
             sleep(500);
         }
         else {
-            robot.ArmTopRed.setPosition(0.2);
+            robot.ArmTopBlue.setPosition(0.2);
             sleep(500);
-            robot.ArmBaseRed.setPosition(0.8);
+            robot.ArmBaseBlue.setPosition(0.2);
             sleep(500);
         }
 
-        robot.ArmTopRed.setPosition(robot.ArmTopCloseRed);
+        robot.ArmTopBlue.setPosition(robot.ArmTopCloseBlue);
         sleep(1000);
-        robot.ArmBaseRed.setPosition(robot.ArmBaseCentreRed);
+        robot.ArmBaseBlue.setPosition(robot.ArmBaseCentreBlue);
         sleep(2000);
 
         telemetry.addData("Image",image);
@@ -159,20 +164,21 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
         telemetry.update();
     }
 
-    public void Glyph_Red1() {
+    public void Glyph_Blue1() {
         //Allign
         backward(45,0.4);
         sleep(800);
-        forward(20,LocalSpeed);
+        forward(15,LocalSpeed);
         sleep(500);
         backward(15,LocalSpeed);
+        sleep(500);
 
-        right(31, LocalSpeed);
+        left(32, LocalSpeed);
         sleep(500);
 
 
         if (image == "Left") {//Left
-            forward(45,LocalSpeed);
+            forward(17,LocalSpeed);
             sleep(500);
         }
         else if (image == "Centre") {//Centre
@@ -180,112 +186,122 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
             sleep(500);
         }
         else if (image == "Right") {//Right
-            forward(15,LocalSpeed);
+            forward(47,LocalSpeed);
             sleep(500);
         }
         else {//Not found
-            forward(30,LocalSpeed);
+            forward(32,LocalSpeed);
+            sleep(500);
+        }
+
+        left(32,LocalSpeed);
+        sleep(500);
+
+
+        //Shoot
+        long EndTimeRoll = System.currentTimeMillis()+1000;
+        while (System.currentTimeMillis() < EndTimeRoll) {
+            robot.Lroll.setPower(-0.9);
+            robot.Rroll.setPower(-0.9);
+            telemetry.update();
+        }
+        robot.Lroll.setPower(0);
+        robot.Rroll.setPower(0);
+        sleep(500);
+        backward(7, LocalSpeed);
+
+        //Push
+        robot.clipL.setPosition(0.6);
+        robot.clipR.setPosition(0.4);
+        sleep(500);
+        forward(30,LocalSpeed);
+        sleep(500);
+        backward(15,LocalSpeed);
+        sleep(500);
+
+        //Ready
+        if (image == "Right") {
+            left(65,LocalSpeed);
+        }
+        else {
+            right(65,LocalSpeed);
+        }
+        sleep(500);
+        backward(20, LocalSpeed);
+        sleep(500);
+    }
+
+    public void Glyph_Blue2() {
+        //Allign
+        backward(50,0.4);
+        sleep(800);
+        forward(15,LocalSpeed);
+        sleep(500);
+
+        if (image == "Left") {//Left
+            backward(30,LocalSpeed);
+            sleep(500);
+        }
+        else if (image == "Centre") {//Centre
+            backward(45,LocalSpeed);
+            sleep(500);
+        }
+        else if (image == "Right") {//Right
+            backward(60,LocalSpeed);
+            sleep(500);
+        }
+        else {//Not found
+            backward(45,LocalSpeed);
             sleep(500);
         }
 
         right(30,LocalSpeed);
         sleep(500);
-        forward(5,LocalSpeed);
-
-        //Shoot
-        long EndTimeRoll = System.currentTimeMillis()+1000;
-        while (System.currentTimeMillis() < EndTimeRoll) {
-            robot.Lroll.setPower(-1);
-            robot.Rroll.setPower(-1);
-            telemetry.update();
-        }
-        robot.Lroll.setPower(0);
-        robot.Rroll.setPower(0);
-        sleep(500);
-
-        //Push
-        robot.clipL.setPosition(0.6);
-        robot.clipR.setPosition(0.4);
-        sleep(500);
-        forward(20, LocalSpeed);
-        sleep(500);
-        backward(15, LocalSpeed);
-        sleep(500);
-
-        //Ready
-        right(66,LocalSpeed);
-        sleep(500);
-        backward(15, LocalSpeed);
-        sleep(500);
-    }
-
-    public void Glyph_Red2() {
-        //Allign
-        backward(45,0.4);
-        sleep(800);
-        forward(20,LocalSpeed);
-        sleep(500);
-
-        if (image == "Left") {//Left
-            backward(54,LocalSpeed);
-            sleep(500);
-        }
-        else if (image == "Centre") {//Centre
-            backward(39,LocalSpeed);
-            sleep(500);
-        }
-        else if (image == "Right") {//Right
-            backward(24,LocalSpeed);
-            sleep(500);
-        }
-        else {//Not found
-            backward(39,LocalSpeed);
-            sleep(500);
-        }
-
-        left(33,LocalSpeed);
-        sleep(500);
-        forward(15,LocalSpeed);
-        sleep(500);
-
-        //Shoot
-        long EndTimeRoll = System.currentTimeMillis()+1000;
-        while (System.currentTimeMillis() < EndTimeRoll) {
-            robot.Lroll.setPower(-1);
-            robot.Rroll.setPower(-1);
-            telemetry.update();
-        }
-        robot.Lroll.setPower(0);
-        robot.Rroll.setPower(0);
-        sleep(500);
-
-        //Push
-        robot.clipL.setPosition(0.6);
-        robot.clipR.setPosition(0.4);
-        sleep(500);
         forward(10,LocalSpeed);
         sleep(500);
-        backward(15,LocalSpeed);
+
+        //Shoot
+        long EndTimeRoll = System.currentTimeMillis()+1000;
+        while (System.currentTimeMillis() < EndTimeRoll) {
+            robot.Lroll.setPower(-0.9);
+            robot.Rroll.setPower(-0.9);
+            telemetry.update();
+        }
+        robot.Lroll.setPower(0);
+        robot.Rroll.setPower(0);
+        sleep(500);
+        backward(5,LocalSpeed);
+
+        //Push
+        robot.clipL.setPosition(0.6);
+        robot.clipR.setPosition(0.4);
+        sleep(500);
+        forward(30,LocalSpeed);
         sleep(500);
 
         //Ready
-        right(66,LocalSpeed);
+        backward(20,LocalSpeed);
         sleep(500);
-        backward(15, LocalSpeed);
-        sleep(500);
+        if (image == "Right") {
+            left(65,LocalSpeed);
+        }
+        else {
+            right(65,LocalSpeed);
+        }
+        backward(15,LocalSpeed);
 
     }
 
     public void Place_Glyph() {
         telemetry.addData("image",image);
         telemetry.update();
-        if (team == "Red" && alliance == "1") {
-            Glyph_Red1();
+        if (team == "Blue" && alliance == "1") {
+            Glyph_Blue1();
         }
-        else if (team == "Red" && alliance == "2") {
-            Glyph_Red2();
+        else if (team == "Blue" && alliance == "2") {
+            Glyph_Blue2();
         }
-    }
+   }
 
     @Override public void runOpMode() {
 
@@ -328,12 +344,12 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
 
         OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
 
-        robot.ArmTopRed.setPosition(robot.ArmTopOpen1Red);
+        robot.ArmTopBlue.setPosition(robot.ArmTopOpen1Blue);
         robot.Lroll.setPower(0);
         robot.Rroll.setPower(0);
         sleep(1000);
 
-        robot.ArmTopRed.setPosition(robot.ArmTopOpen2Red);
+        robot.ArmTopBlue.setPosition(robot.ArmTopOpen2Blue);
         sleep(1000);
 
         telemetry.addData("Image", image);
