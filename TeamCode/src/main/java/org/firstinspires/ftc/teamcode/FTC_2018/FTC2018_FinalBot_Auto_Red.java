@@ -43,10 +43,16 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
         robot.runModeSet("reset");
         robot.runModeSet("position");
 
+
+        robot.ColourSensorBlue.enableLed(true);
+        robot.ArmBaseBlue.setPosition(robot.ArmBaseCentreBlue);
+        robot.ArmTopBlue.setPosition(robot.ArmTopCloseBlue);
+
+
+        robot.ColourSensorRed.enableLed(true);
         robot.ArmBaseRed.setPosition(robot.ArmBaseCentreRed);
         robot.ArmTopRed.setPosition(robot.ArmTopCloseRed);
 
-        robot.ColourSensorRed.enableLed(true);
         robot.clipL.setPosition(0);
         robot.clipR.setPosition(1);
     }
@@ -155,8 +161,8 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
 
     public void Glyph_Red1() {
         //Allign
-        backward(50,0.4);
-        sleep(1000);
+        backward(45,0.4);
+        sleep(800);
         forward(20,LocalSpeed);
         sleep(500);
         backward(15,LocalSpeed);
@@ -189,8 +195,8 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
         //Shoot
         long EndTimeRoll = System.currentTimeMillis()+1000;
         while (System.currentTimeMillis() < EndTimeRoll) {
-            robot.Lroll.setPower(-0.5);
-            robot.Rroll.setPower(-0.5);
+            robot.Lroll.setPower(-1);
+            robot.Rroll.setPower(-1);
             telemetry.update();
         }
         robot.Lroll.setPower(0);
@@ -215,13 +221,13 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
 
     public void Glyph_Red2() {
         //Allign
-        backward(50,0.4);
-        sleep(1000);
-        forward(15,LocalSpeed);
+        backward(45,0.4);
+        sleep(800);
+        forward(20,LocalSpeed);
         sleep(500);
 
         if (image == "Left") {//Left
-            backward(55,LocalSpeed);
+            backward(54,LocalSpeed);
             sleep(500);
         }
         else if (image == "Centre") {//Centre
@@ -245,8 +251,8 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
         //Shoot
         long EndTimeRoll = System.currentTimeMillis()+1000;
         while (System.currentTimeMillis() < EndTimeRoll) {
-            robot.Lroll.setPower(-0.5);
-            robot.Rroll.setPower(-0.5);
+            robot.Lroll.setPower(-1);
+            robot.Rroll.setPower(-1);
             telemetry.update();
         }
         robot.Lroll.setPower(0);
@@ -257,7 +263,7 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
         robot.clipL.setPosition(0.6);
         robot.clipR.setPosition(0.4);
         sleep(500);
-        forward(20,LocalSpeed);
+        forward(10,LocalSpeed);
         sleep(500);
         backward(15,LocalSpeed);
         sleep(500);
@@ -307,8 +313,6 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
         telemetry.addData("Status", "Scanning");
         telemetry.update();
 
-        robot.ArmTopRed.setPosition(robot.ArmTopOpen1Red);
-
         long EndTimeScan = System.currentTimeMillis()+2000;
         while (System.currentTimeMillis() < EndTimeScan) {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
@@ -316,24 +320,21 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
             else if (vuMark == RelicRecoveryVuMark.LEFT) image = "Left";
             else if (vuMark == RelicRecoveryVuMark.RIGHT) image = "Right";
             else image = "Not found";
-            robot.Lroll.setPower(1);
-            robot.Rroll.setPower(1);
+            robot.Lroll.setPower(0.3);
+            robot.Rroll.setPower(0.3);
             telemetry.addData("Result", vuMark);
             telemetry.update();
         }
 
-        robot.ArmTopRed.setPosition(robot.ArmTopOpen2Red);
+        OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
+
+        robot.ArmTopRed.setPosition(robot.ArmTopOpen1Red);
         robot.Lroll.setPower(0);
         robot.Rroll.setPower(0);
-        sleep(500);
+        sleep(1000);
 
-        RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-
-        if (vuMark == RelicRecoveryVuMark.CENTER) image = "Center";
-        else if (vuMark == RelicRecoveryVuMark.LEFT) image = "Left";
-        else if (vuMark == RelicRecoveryVuMark.RIGHT) image = "Right";
-
-        OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
+        robot.ArmTopRed.setPosition(robot.ArmTopOpen2Red);
+        sleep(1000);
 
         telemetry.addData("Image", image);
         telemetry.update();

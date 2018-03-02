@@ -8,6 +8,8 @@ public class FTC2018_FinalBot_Manual extends OpMode{
 
     FTC2018_FinalBot_Init robot = new FTC2018_FinalBot_Init();
 
+    double tmpp = 0;
+
     @Override
     public void init(){
         robot.init(hardwareMap);
@@ -131,8 +133,8 @@ public class FTC2018_FinalBot_Manual extends OpMode{
         double g2rightStickY = -gamepad2.right_stick_y;
 
         if (gamepad2.a) {//open
-            robot.clipL.setPosition(0.6);//1
-            robot.clipR.setPosition(0.4);//0
+            robot.clipL.setPosition(0.7);//1
+            robot.clipR.setPosition(0.3);//0
         }
         else if (gamepad2.b) {//close
             robot.clipL.setPosition(0);//0.1
@@ -155,8 +157,23 @@ public class FTC2018_FinalBot_Manual extends OpMode{
         robot.Rroll.setPower(robot.Rolltmp);
         robot.Lroll.setPower(robot.Rolltmp);
 
-        robot.Lrope.setPower(-g2rightStickY);
-        robot.Rrope.setPower(-g2rightStickY);
+        if (Math.abs(g2rightStickY) < 0.2) {
+            if (gamepad1.dpad_up) {
+                robot.Lrope.setPower(-1);
+                robot.Rrope.setPower(-1);
+            } else if (gamepad1.dpad_down) {
+                robot.Lrope.setPower(1);
+                robot.Rrope.setPower(1);
+            }
+            else {
+                robot.Lrope.setPower(0);
+                robot.Rrope.setPower(0);
+            }
+        }
+        else {
+            robot.Lrope.setPower(-g2rightStickY);
+            robot.Rrope.setPower(-g2rightStickY);
+        }
     }
 
     /*public void Relic_Ruler() {//not used
@@ -269,10 +286,10 @@ public class FTC2018_FinalBot_Manual extends OpMode{
         robot.Lbackforward = RoundDownDp(robot.Lbackforward*speed_old+leftStickY*speed_new, 0.001);
         robot.Rbackforward = RoundDownDp(robot.Rbackforward*speed_old+leftStickY*speed_new, 0.001);
 
-        robot.Lfronttmp = RoundDownDp(robot.Lfrontforward*0.7+leftStickX*1+rightStickX*0.7, 0.001);
-        robot.Rfronttmp = RoundDownDp(robot.Rfrontforward*0.7-leftStickX*1-rightStickX*0.7, 0.001);
-        robot.Lbacktmp = RoundDownDp(robot.Lbackforward*0.7-leftStickX*1+rightStickX*0.7, 0.001);
-        robot.Rbacktmp = RoundDownDp(robot.Rbackforward*0.7+leftStickX*1-rightStickX*0.7, 0.001);
+        robot.Lfronttmp = RoundDownDp(robot.Lfrontforward*0.7+rightStickX*0.7, 0.001);
+        robot.Rfronttmp = RoundDownDp(robot.Rfrontforward*0.7-rightStickX*0.7, 0.001);
+        robot.Lbacktmp = RoundDownDp(robot.Lbackforward*0.7+rightStickX*0.7, 0.001);
+        robot.Rbacktmp = RoundDownDp(robot.Rbackforward*0.7-rightStickX*0.7, 0.001);
 
         robot.Lfront.setPower(robot.Lfronttmp);
         robot.Lback.setPower(robot.Lbacktmp);
@@ -314,23 +331,12 @@ public class FTC2018_FinalBot_Manual extends OpMode{
         }
         else if (gamepad1.b) {
             //Blue L
-            robot.ArmBaseBlue.setPosition(robot.ArmBaseForwardBlue);
-            robot.ArmTopBlue.setPosition(robot.ArmTopOpen1Blue);
+            //robot.ArmBaseBlue.setPosition(robot.ArmBaseForwardBlue);
+            robot.ArmTopBlue.setPosition(robot.ArmTopOpen2Blue);
 
             //Red R
-            robot.ArmBaseRed.setPosition(robot.ArmBaseForwardRed);
-            robot.ArmTopRed.setPosition(robot.ArmTopOpen1Red);
-        }
-
-        if (Math.abs(gamepad2.right_stick_y) < 0.2) {
-            if (gamepad1.dpad_up) {
-                robot.Lrope.setPower(-1);
-                robot.Rrope.setPower(-1);
-            }
-            else if (gamepad1.dpad_down) {
-                robot.Lrope.setPower(1);
-                robot.Rrope.setPower(1);
-            }
+            //robot.ArmBaseRed.setPosition(robot.ArmBaseForwardRed);
+            robot.ArmTopRed.setPosition(robot.ArmTopOpen2Red);
         }
 
         if (gamepad1.right_trigger > 0) {

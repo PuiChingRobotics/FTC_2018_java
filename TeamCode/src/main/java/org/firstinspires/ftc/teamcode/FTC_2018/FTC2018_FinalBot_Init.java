@@ -60,7 +60,7 @@ public class FTC2018_FinalBot_Init {
     public final double JewelBlueUpper = 0.25;
     public final double JewelBlueLower = 0.1;
     public final double JewelRedUpper = 0.5;
-    public final double JewelRedLower = 0.275;
+    public final double JewelRedLower = 0.27;
 
     public final double turning90 = 36;
     public final double turning180 = 48;
@@ -109,7 +109,7 @@ public class FTC2018_FinalBot_Init {
 
         Rfront.setDirection(DcMotorSimple.Direction.REVERSE);
         Rback.setDirection(DcMotorSimple.Direction.REVERSE);
-        Rrope.setDirection(DcMotorSimple.Direction.REVERSE);
+        Lrope.setDirection(DcMotorSimple.Direction.REVERSE);
         Rroll.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 

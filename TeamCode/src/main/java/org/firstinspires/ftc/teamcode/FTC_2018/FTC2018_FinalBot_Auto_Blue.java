@@ -26,7 +26,7 @@ public class FTC2018_FinalBot_Auto_Blue extends LinearOpMode {
     String jewel = "Empty";
     String image = "Empty";
     String team = "Blue";
-    String alliance = "1";
+    String alliance = "2";
     double data = 0;
 
 
@@ -43,10 +43,16 @@ public class FTC2018_FinalBot_Auto_Blue extends LinearOpMode {
         robot.runModeSet("reset");
         robot.runModeSet("position");
 
+
+        robot.ColourSensorBlue.enableLed(true);
         robot.ArmBaseBlue.setPosition(robot.ArmBaseCentreBlue);
         robot.ArmTopBlue.setPosition(robot.ArmTopCloseBlue);
 
-        robot.ColourSensorBlue.enableLed(true);
+
+        robot.ColourSensorRed.enableLed(true);
+        robot.ArmBaseRed.setPosition(robot.ArmBaseCentreRed);
+        robot.ArmTopRed.setPosition(robot.ArmTopCloseRed);
+
         robot.clipL.setPosition(0);
         robot.clipR.setPosition(1);
     }
@@ -160,18 +166,19 @@ public class FTC2018_FinalBot_Auto_Blue extends LinearOpMode {
 
     public void Glyph_Blue1() {
         //Allign
-        backward(50,0.4);
-        sleep(1000);
+        backward(45,0.4);
+        sleep(800);
         forward(15,LocalSpeed);
+        sleep(500);
         backward(15,LocalSpeed);
         sleep(500);
 
-        left(33, LocalSpeed);
+        left(32, LocalSpeed);
         sleep(500);
 
 
         if (image == "Left") {//Left
-            forward(10,LocalSpeed);
+            forward(17,LocalSpeed);
             sleep(500);
         }
         else if (image == "Centre") {//Centre
@@ -179,23 +186,23 @@ public class FTC2018_FinalBot_Auto_Blue extends LinearOpMode {
             sleep(500);
         }
         else if (image == "Right") {//Right
-            forward(45,LocalSpeed);
+            forward(47,LocalSpeed);
             sleep(500);
         }
         else {//Not found
-            forward(10,LocalSpeed);
+            forward(32,LocalSpeed);
             sleep(500);
         }
 
-        left(31,LocalSpeed);
+        left(32,LocalSpeed);
         sleep(500);
 
 
         //Shoot
         long EndTimeRoll = System.currentTimeMillis()+1000;
         while (System.currentTimeMillis() < EndTimeRoll) {
-            robot.Lroll.setPower(-0.7);
-            robot.Rroll.setPower(-0.7);
+            robot.Lroll.setPower(-0.9);
+            robot.Rroll.setPower(-0.9);
             telemetry.update();
         }
         robot.Lroll.setPower(0);
@@ -207,13 +214,18 @@ public class FTC2018_FinalBot_Auto_Blue extends LinearOpMode {
         robot.clipL.setPosition(0.6);
         robot.clipR.setPosition(0.4);
         sleep(500);
-        forward(5,LocalSpeed);
+        forward(30,LocalSpeed);
         sleep(500);
-        backward(10,LocalSpeed);
+        backward(15,LocalSpeed);
         sleep(500);
 
         //Ready
-        left(66,LocalSpeed);
+        if (image == "Right") {
+            left(65,LocalSpeed);
+        }
+        else {
+            right(65,LocalSpeed);
+        }
         sleep(500);
         backward(20, LocalSpeed);
         sleep(500);
@@ -222,37 +234,37 @@ public class FTC2018_FinalBot_Auto_Blue extends LinearOpMode {
     public void Glyph_Blue2() {
         //Allign
         backward(50,0.4);
-        sleep(1000);
+        sleep(800);
         forward(15,LocalSpeed);
         sleep(500);
 
         if (image == "Left") {//Left
-            backward(38,LocalSpeed);
-            sleep(503);
+            backward(30,LocalSpeed);
+            sleep(500);
         }
         else if (image == "Centre") {//Centre
-            backward(55,LocalSpeed);
-            sleep(503);
+            backward(45,LocalSpeed);
+            sleep(500);
         }
         else if (image == "Right") {//Right
-            backward(67,LocalSpeed);
-            sleep(503);
+            backward(60,LocalSpeed);
+            sleep(500);
         }
         else {//Not found
-            backward(38,LocalSpeed);
-            sleep(503);
+            backward(45,LocalSpeed);
+            sleep(500);
         }
 
         right(30,LocalSpeed);
         sleep(500);
-        forward(5,LocalSpeed);
+        forward(10,LocalSpeed);
         sleep(500);
 
         //Shoot
         long EndTimeRoll = System.currentTimeMillis()+1000;
         while (System.currentTimeMillis() < EndTimeRoll) {
-            robot.Lroll.setPower(-0.7);
-            robot.Rroll.setPower(-0.7);
+            robot.Lroll.setPower(-0.9);
+            robot.Rroll.setPower(-0.9);
             telemetry.update();
         }
         robot.Lroll.setPower(0);
@@ -268,9 +280,14 @@ public class FTC2018_FinalBot_Auto_Blue extends LinearOpMode {
         sleep(500);
 
         //Ready
-        backward(15,LocalSpeed);
+        backward(20,LocalSpeed);
         sleep(500);
-        right(65,LocalSpeed);
+        if (image == "Right") {
+            left(65,LocalSpeed);
+        }
+        else {
+            right(65,LocalSpeed);
+        }
         backward(15,LocalSpeed);
 
     }
@@ -284,7 +301,7 @@ public class FTC2018_FinalBot_Auto_Blue extends LinearOpMode {
         else if (team == "Blue" && alliance == "2") {
             Glyph_Blue2();
         }
-    }
+   }
 
     @Override public void runOpMode() {
 
@@ -312,8 +329,6 @@ public class FTC2018_FinalBot_Auto_Blue extends LinearOpMode {
         telemetry.addData("Status", "Scanning");
         telemetry.update();
 
-        robot.ArmTopBlue.setPosition(robot.ArmTopOpen1Blue);
-
         long EndTimeScan = System.currentTimeMillis()+2000;
         while (System.currentTimeMillis() < EndTimeScan) {
             RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
@@ -321,30 +336,21 @@ public class FTC2018_FinalBot_Auto_Blue extends LinearOpMode {
             else if (vuMark == RelicRecoveryVuMark.LEFT) image = "Left";
             else if (vuMark == RelicRecoveryVuMark.RIGHT) image = "Right";
             else image = "Not found";
-            robot.Lroll.setPower(1);
-            robot.Rroll.setPower(1);
+            robot.Lroll.setPower(0.3);
+            robot.Rroll.setPower(0.3);
             telemetry.addData("Result", vuMark);
             telemetry.update();
         }
 
-        robot.ArmTopBlue.setPosition(robot.ArmTopOpen2Blue);
+        OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
 
-        long EndTimeRoll = System.currentTimeMillis()+1000;
-        while (System.currentTimeMillis() < EndTimeRoll) {
-            robot.Lroll.setPower(1);
-            robot.Rroll.setPower(1);
-            telemetry.update();
-        }
+        robot.ArmTopBlue.setPosition(robot.ArmTopOpen1Blue);
         robot.Lroll.setPower(0);
         robot.Rroll.setPower(0);
-        sleep(500);
+        sleep(1000);
 
-        RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-        if (vuMark == RelicRecoveryVuMark.CENTER) image = "Center";
-        else if (vuMark == RelicRecoveryVuMark.LEFT) image = "Left";
-        else if (vuMark == RelicRecoveryVuMark.RIGHT) image = "Right";
-
-        OpenGLMatrix pose = ((VuforiaTrackableDefaultListener) relicTemplate.getListener()).getPose();
+        robot.ArmTopBlue.setPosition(robot.ArmTopOpen2Blue);
+        sleep(1000);
 
         telemetry.addData("Image", image);
         telemetry.update();
