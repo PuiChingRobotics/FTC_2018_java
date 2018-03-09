@@ -245,7 +245,7 @@ public class FTC2018_FinalBot_Auto_Red extends LinearOpMode {
 
         left(33,LocalSpeed);
         sleep(500);
-        forward(15,LocalSpeed);
+        forward(12,LocalSpeed);
         sleep(500);
 
         //Shoot

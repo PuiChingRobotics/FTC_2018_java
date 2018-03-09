@@ -274,8 +274,8 @@ public class FTC2018_FinalBot_Manual extends OpMode{
         double g2rightStickX = gamepad2.right_stick_x;
         double g2rightStickY = -gamepad2.right_stick_y;
 
-        double speed_new = 0.2;
-        double speed_old = 0.8;
+        double speed_new = 1-0.7;
+        double speed_old = 0.7;
 
         telemetry.addData("Running", "Robot 1");
         //player1
@@ -286,10 +286,10 @@ public class FTC2018_FinalBot_Manual extends OpMode{
         robot.Lbackforward = RoundDownDp(robot.Lbackforward*speed_old+leftStickY*speed_new, 0.001);
         robot.Rbackforward = RoundDownDp(robot.Rbackforward*speed_old+leftStickY*speed_new, 0.001);
 
-        robot.Lfronttmp = RoundDownDp(robot.Lfrontforward*0.7+rightStickX*0.7, 0.001);
-        robot.Rfronttmp = RoundDownDp(robot.Rfrontforward*0.7-rightStickX*0.7, 0.001);
-        robot.Lbacktmp = RoundDownDp(robot.Lbackforward*0.7+rightStickX*0.7, 0.001);
-        robot.Rbacktmp = RoundDownDp(robot.Rbackforward*0.7-rightStickX*0.7, 0.001);
+        robot.Lfronttmp = RoundDownDp(leftStickY*1+rightStickX*1, 0.001);
+        robot.Rfronttmp = RoundDownDp(leftStickY*1-rightStickX*1, 0.001);
+        robot.Lbacktmp = RoundDownDp(leftStickY*1+rightStickX*1, 0.001);
+        robot.Rbacktmp = RoundDownDp(leftStickY*1-rightStickX*1, 0.001);
 
         robot.Lfront.setPower(robot.Lfronttmp);
         robot.Lback.setPower(robot.Lbacktmp);

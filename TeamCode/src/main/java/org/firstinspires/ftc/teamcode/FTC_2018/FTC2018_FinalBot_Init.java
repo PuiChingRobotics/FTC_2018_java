@@ -111,6 +111,11 @@ public class FTC2018_FinalBot_Init {
         Rback.setDirection(DcMotorSimple.Direction.REVERSE);
         Lrope.setDirection(DcMotorSimple.Direction.REVERSE);
         Rroll.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        Lfront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        Lback.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        Rfront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        Rback.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
     public void runModeSet(String mode) {
@@ -137,7 +142,6 @@ public class FTC2018_FinalBot_Init {
             Lback.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             Rfront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             Rback.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            //write something to push
         }
     }
 }
