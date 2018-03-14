@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.FTC_2018;
+package org.firstinspires.ftc.teamcode.FTC_2018.FTC_2018_HK;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.LightSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-public class FTC2018_FinalBot_Init {
+public class FTC_2018_HK_FinalBot_Init {
 
     public Servo clipL;
     public Servo clipR;

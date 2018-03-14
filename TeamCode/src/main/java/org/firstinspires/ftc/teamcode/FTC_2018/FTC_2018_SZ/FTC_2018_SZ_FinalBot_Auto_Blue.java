@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.FTC_2018;
+package org.firstinspires.ftc.teamcode.FTC_2018.FTC_2018_SZ;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -12,9 +12,9 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackableDefau
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 
-@Autonomous(name="FTC2018_FinalBot_Auto_Blue2", group ="FTC 2018")
+@Autonomous(name="FTC_2018_SZ_FinalBot_Auto_Blue", group ="FTC 2018")
 
-public class FTC2018_FinalBot_Auto_Blue2 extends LinearOpMode {
+public class FTC_2018_SZ_FinalBot_Auto_Blue extends LinearOpMode {
 
     public static final String TAG = "Vuforia VuMark Sample";
 
@@ -27,10 +27,11 @@ public class FTC2018_FinalBot_Auto_Blue2 extends LinearOpMode {
     String image = "Empty";
     String team = "Blue";
     String alliance = "2";
-    double data = 0;
+    double data1 = 0;
+    double data2 = 0;
 
 
-    FTC2018_FinalBot_Init robot = new FTC2018_FinalBot_Init();
+    FTC_2018_SZ_FinalBot_Init robot = new FTC_2018_SZ_FinalBot_Init();
 
     public void initial(){
         robot.init(hardwareMap);
@@ -43,13 +44,13 @@ public class FTC2018_FinalBot_Auto_Blue2 extends LinearOpMode {
         robot.runModeSet("reset");
         robot.runModeSet("position");
 
-
-        robot.ColourSensorBlue.enableLed(true);
+        robot.ColourSensorBlue1.enableLed(true);
+        robot.ColourSensorBlue2.enableLed(true);
         robot.ArmBaseBlue.setPosition(robot.ArmBaseCentreBlue);
         robot.ArmTopBlue.setPosition(robot.ArmTopCloseBlue);
 
-
-        robot.ColourSensorRed.enableLed(true);
+        robot.ColourSensorRed1.enableLed(true);
+        robot.ColourSensorRed2.enableLed(true);
         robot.ArmBaseRed.setPosition(robot.ArmBaseCentreRed);
         robot.ArmTopRed.setPosition(robot.ArmTopCloseRed);
 
@@ -117,20 +118,30 @@ public class FTC2018_FinalBot_Auto_Blue2 extends LinearOpMode {
     }
 
     public void Kick_Jewel() {
-        data = robot.ColourSensorBlue.getLightDetected();
-        if (robot.JewelBlueLower < data && data < robot.JewelBlueUpper){
+        data1 = robot.ColourSensorBlue1.getLightDetected();
+        data2 = robot.ColourSensorBlue2.getLightDetected();
+        if (robot.JewelBlueLower < data2 && data2 < robot.JewelBlueUpper){
             jewel = "Blue";
         }
-        else if (robot.JewelBlueUpper <= data && data <= robot.JewelRedLower) {//over-lapped data
-            jewel = "Over-lapped";
+        else if (robot.JewelBlueUpper <= data2 && data2 <= robot.JewelRedLower) {//over-lapped data
+            if (robot.JewelBlueLower < data1 && data1 < robot.JewelBlueUpper){
+                jewel = "Blue";
+            }
+            else if (robot.JewelBlueUpper <= data1 && data1 <= robot.JewelRedLower) {//over-lapped data
+                jewel = "Over-lapped";
+            }
+            else if (robot.JewelRedLower < data1 && data1 < robot.JewelRedUpper){
+                jewel = "Red";
+            }
         }
-        else if (robot.JewelRedLower < data && data < robot.JewelRedUpper){
+        else if (robot.JewelRedLower < data2 && data2 < robot.JewelRedUpper){
             jewel = "Red";
         }
 
         telemetry.addData("Image",image);
         telemetry.addData("Jewel",jewel);
-        telemetry.addData("SensorValue",data);
+        telemetry.addData("SensorValue1",data1);
+        telemetry.addData("SensorValue2",data2);
         telemetry.update();
 
         if (jewel == "Red") {
@@ -160,7 +171,8 @@ public class FTC2018_FinalBot_Auto_Blue2 extends LinearOpMode {
 
         telemetry.addData("Image",image);
         telemetry.addData("Jewel",jewel);
-        telemetry.addData("SensorValue",data);
+        telemetry.addData("SensorValue1",data1);
+        telemetry.addData("SensorValue2",data2);
         telemetry.update();
     }
 
@@ -361,10 +373,9 @@ public class FTC2018_FinalBot_Auto_Blue2 extends LinearOpMode {
 
         telemetry.addData("Image", image);
         telemetry.addData("Jewel", jewel);
-        telemetry.addData("data", data);
+        telemetry.addData("SensorValue1",data1);
+        telemetry.addData("SensorValue2",data2);
         telemetry.update();
         sleep(30000);
-        //write something to push
-
     }
 }

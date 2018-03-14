@@ -1,12 +1,12 @@
-package org.firstinspires.ftc.teamcode.FTC_2018;
+package org.firstinspires.ftc.teamcode.FTC_2018.FTC_2018_SZ;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name="FTC2018_FinalBot_Manual", group="FTC 2018")
-public class FTC2018_FinalBot_Manual extends OpMode{
+@TeleOp(name="FTC_2018_SZ_FinalBot_Manual", group="FTC 2018")
+public class FTC_2018_SZ_FinalBot_Manual extends OpMode{
 
-    FTC2018_FinalBot_Init robot = new FTC2018_FinalBot_Init();
+    FTC_2018_SZ_FinalBot_Init robot = new FTC_2018_SZ_FinalBot_Init();
 
     double tmpp = 0;
 
@@ -26,12 +26,14 @@ public class FTC2018_FinalBot_Manual extends OpMode{
         robot.clipR.setPosition(0.8);
 
         //Blue L
-        robot.ColourSensorBlue.enableLed(true);
+        robot.ColourSensorBlue1.enableLed(true);
+        robot.ColourSensorBlue2.enableLed(true);
         robot.ArmBaseBlue.setPosition(robot.ArmBaseCentreBlue);
         robot.ArmTopBlue.setPosition(robot.ArmTopCloseBlue);
 
         //Red R
-        robot.ColourSensorRed.enableLed(true);
+        robot.ColourSensorRed1.enableLed(true);
+        robot.ColourSensorRed2.enableLed(true);
         robot.ArmBaseRed.setPosition(robot.ArmBaseCentreRed);
         robot.ArmTopRed.setPosition(robot.ArmTopCloseRed);
 
@@ -286,10 +288,10 @@ public class FTC2018_FinalBot_Manual extends OpMode{
         robot.Lbackforward = RoundDownDp(robot.Lbackforward*speed_old+leftStickY*speed_new, 0.001);
         robot.Rbackforward = RoundDownDp(robot.Rbackforward*speed_old+leftStickY*speed_new, 0.001);
 
-        robot.Lfronttmp = RoundDownDp(leftStickY*1+rightStickX*1, 0.001);
-        robot.Rfronttmp = RoundDownDp(leftStickY*1-rightStickX*1, 0.001);
-        robot.Lbacktmp = RoundDownDp(leftStickY*1+rightStickX*1, 0.001);
-        robot.Rbacktmp = RoundDownDp(leftStickY*1-rightStickX*1, 0.001);
+        robot.Lfronttmp = RoundDownDp(leftStickY*1+rightStickX*0.7, 0.001);
+        robot.Rfronttmp = RoundDownDp(leftStickY*1-rightStickX*0.7, 0.001);
+        robot.Lbacktmp = RoundDownDp(leftStickY*1+rightStickX*0.7, 0.001);
+        robot.Rbacktmp = RoundDownDp(leftStickY*1-rightStickX*0.7, 0.001);
 
         robot.Lfront.setPower(robot.Lfronttmp);
         robot.Lback.setPower(robot.Lbacktmp);
@@ -312,11 +314,13 @@ public class FTC2018_FinalBot_Manual extends OpMode{
         telemetry.addData("Lbacktmp", robot.Lbacktmp);
         telemetry.addData("Rbacktmp", robot.Rbacktmp);
 
-        telemetry.addData("SensorBlue", robot.ColourSensorBlue.getLightDetected());
+        telemetry.addData("SensorBlue1", robot.ColourSensorBlue1.getLightDetected());
+        telemetry.addData("SensorBlue2", robot.ColourSensorBlue2.getLightDetected());
         telemetry.addData("ArmBaseBlue", robot.ArmBaseBlue.getPosition());
         telemetry.addData("ArmTopBlue", robot.ArmTopBlue.getPosition());
 
-        telemetry.addData("SensorRed", robot.ColourSensorRed.getLightDetected());
+        telemetry.addData("SensorRed1", robot.ColourSensorRed1.getLightDetected());
+        telemetry.addData("SensorRed2", robot.ColourSensorRed2.getLightDetected());
         telemetry.addData("ArmBaseRed", robot.ArmBaseRed.getPosition());
         telemetry.addData("ArmTopRed", robot.ArmTopRed.getPosition());
 

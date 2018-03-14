@@ -1,24 +1,30 @@
-package org.firstinspires.ftc.teamcode.FTC_2018;
+package org.firstinspires.ftc.teamcode.FTC_2018.FTC_2018_SZ;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.LightSensor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
-public class FTC2018_RobotInit_robot1 {
+public class FTC_2018_SZ_FinalBot_Init {
 
-    public Servo clipL0;
-    public Servo clipL1;
-    public Servo clipR0;
-    public Servo clipSpare;
+    public Servo clipL;
+    public Servo clipR;
 
-    public Servo ArmBase;
-    public Servo ArmTop;
+    public Servo unusedL;
+    public Servo unusedR;
+    public Servo unusedClip;
 
-    public LightSensor ColourSensorL;
-    public LightSensor ColourSensorR;
+    public Servo ArmBaseBlue;
+    public Servo ArmTopBlue;
+    public Servo ArmBaseRed;
+    public Servo ArmTopRed;
+
+    public LightSensor ColourSensorBlue1;
+    public LightSensor ColourSensorBlue2;
+    public LightSensor ColourSensorRed1;
+    public LightSensor ColourSensorRed2;
 
     public DcMotor rope;
     public DcMotor lifting;
@@ -38,16 +44,7 @@ public class FTC2018_RobotInit_robot1 {
     public final double clipUp = 1;     //continuous servo value
     public final double clipStop = 0.5;//continuous servo value
 
-    public final double clipL0open = 0.5;
-    public final double clipR0open = 0.5;
-    public final double clipL0close = 0;
-    public final double clipR0close = 1;
-
-    public final double clipL1open = 0.2;
-    public final double clipSpareopen = 0.4;
-    public final double clipL1close = 0.8;
-    public final double clipSpareclose = 1;
-
+    //Auto
     public final double ArmBaseBackwardBlue = 0.8;
     public final double ArmBaseCentreBlue = 0.5;
     public final double ArmBaseForwardBlue = 0.2;
@@ -65,11 +62,12 @@ public class FTC2018_RobotInit_robot1 {
     public final double JewelBlueUpper = 0.25;
     public final double JewelBlueLower = 0.1;
     public final double JewelRedUpper = 0.5;
-    public final double JewelRedLower = 0.275;
+    public final double JewelRedLower = 0.27;
 
-    public final double clipBRfullopen = 0;
-    public final double clipBLfullopen = 1;
+    public final double turning90 = 36;
+    public final double turning180 = 48;
 
+    //Drive
     public double Lfronttmp = 0;
     public double Lbacktmp = 0;
     public double Rfronttmp = 0;
@@ -80,26 +78,22 @@ public class FTC2018_RobotInit_robot1 {
     public double Rfrontforward = 0;
     public double Rbackforward = 0;
 
-    public double turning90 = 36;
-    public double turning180 = 48;
+    //Roll
+    public double Rolltmp = 0;
 
-    public double tmp;
 
     public HardwareMap _hw;
 
     public void init(HardwareMap hw){
         _hw = hw;
 
-        clipL0 = _hw.servo.get("clipL0");
-        clipR0 = _hw.servo.get("clipR0");
-        clipL1 = _hw.servo.get("clipL1");
-        clipSpare = _hw.servo.get("clipSpare");
+        clipL = _hw.servo.get("clipL");
+        clipR = _hw.servo.get("clipR");
 
-        ArmBase = _hw.servo.get("ArmBase");   //unuesd
-        ArmTop = _hw.servo.get("ArmTop");   //unuesd
-
-        rope = _hw.dcMotor.get("rope");
-        lifting = _hw.dcMotor.get("lifting");
+        ArmBaseBlue = _hw.servo.get("ArmBaseBlue");
+        ArmTopBlue = _hw.servo.get("ArmTopBlue");
+        ArmBaseRed = _hw.servo.get("ArmBaseRed");
+        ArmTopRed = _hw.servo.get("ArmTopRed");
 
         Lrope = _hw.dcMotor.get("Lrope");
         Rrope = _hw.dcMotor.get("Rrope");
@@ -112,15 +106,20 @@ public class FTC2018_RobotInit_robot1 {
         Lback = _hw.dcMotor.get("Lback");
         Rback = _hw.dcMotor.get("Rback");
 
-        ColourSensorL = _hw.lightSensor.get("ColourSensorL");
-        ColourSensorR = _hw.lightSensor.get("ColourSensorR");
+        ColourSensorBlue1 = _hw.lightSensor.get("ColourSensorBlue1");
+        ColourSensorBlue2 = _hw.lightSensor.get("ColourSensorBlue2");
+        ColourSensorRed1 = _hw.lightSensor.get("ColourSensorRed1");
+        ColourSensorRed2 = _hw.lightSensor.get("ColourSensorRed2");
 
         Rfront.setDirection(DcMotorSimple.Direction.REVERSE);
         Rback.setDirection(DcMotorSimple.Direction.REVERSE);
-        Rrope.setDirection(DcMotorSimple.Direction.REVERSE);
+        Lrope.setDirection(DcMotorSimple.Direction.REVERSE);
         Rroll.setDirection(DcMotorSimple.Direction.REVERSE);
-        rope.setDirection(DcMotorSimple.Direction.REVERSE);
-        lifting.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        Lfront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        Lback.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        Rfront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        Rback.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
     public void runModeSet(String mode) {
