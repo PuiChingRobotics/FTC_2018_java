@@ -368,6 +368,6 @@ public class FTC_2018_SZ_FinalBot_Manual extends OpMode{
     }
     @Override
     public void stop(){
-
+//
     }
 }
