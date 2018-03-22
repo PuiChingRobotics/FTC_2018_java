@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 @TeleOp(name="FTC_2018_SZ_Robot1_Manual_FA", group="FTC 2018")
 public class FTC_2018_SZ_Robot1_Manual_FA extends OpMode{
 
-    FTC_2018_SZ_Robot1_Init robot = new FTC_2018_SZ_Robot1_Init();//h
+    FTC_2018_SZ_Robot1_Init robot = new FTC_2018_SZ_Robot1_Init();
 
     @Override
     public void init(){

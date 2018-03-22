@@ -14,7 +14,7 @@ public class FTC_2018_SZ_Robot2_Auto_Blue1 extends LinearOpMode {
     public static final String TAG = "Vuforia VuMark Sample";
 
     OpenGLMatrix lastLocation = null;
-//trs
+
     VuforiaLocalizer vuforia;
 
     final public double LocalSpeed = 0.8;
