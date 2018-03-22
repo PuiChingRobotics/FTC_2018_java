@@ -3,12 +3,10 @@ package org.firstinspires.ftc.teamcode.FTC_2018.FTC_2018_SZ;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name="FTC_2018_SZ_FinalBot_Manual", group="FTC 2018")
-public class FTC_2018_SZ_FinalBot_Manual extends OpMode{
+@TeleOp(name="FTC_2018_SZ_Robot1_Manual", group="FTC 2018")
+public class FTC_2018_SZ_Robot1_Manual extends OpMode{
 
-    FTC_2018_SZ_FinalBot_Init robot = new FTC_2018_SZ_FinalBot_Init();
-
-    double tmpp = 0;
+    FTC_2018_SZ_Robot1_Init robot = new FTC_2018_SZ_Robot1_Init();
 
     @Override
     public void init(){
@@ -20,7 +18,6 @@ public class FTC_2018_SZ_FinalBot_Manual extends OpMode{
 
         robot.Lrope.setPower(0);
         robot.Rrope.setPower(0);
-
 
         robot.clipL.setPosition(0.2);
         robot.clipR.setPosition(0.8);
@@ -36,7 +33,6 @@ public class FTC_2018_SZ_FinalBot_Manual extends OpMode{
         robot.ColourSensorRed2.enableLed(true);
         robot.ArmBaseRed.setPosition(robot.ArmBaseCentreRed);
         robot.ArmTopRed.setPosition(robot.ArmTopCloseRed);
-
     }
 
 
@@ -64,12 +60,12 @@ public class FTC_2018_SZ_FinalBot_Manual extends OpMode{
         if (gamepad1.x) {//open
             robot.unusedL.setPosition(0.2);
             robot.unusedR.setPosition(0.4);
-        	
+
         }
         if (gamepad1.y) {//close
             robot.unusedL.setPosition(0.8);
             robot.unusedR.setPosition(1);
-        	
+
         }
 
         if (gamepad1.dpad_up == true) {
@@ -233,7 +229,7 @@ public class FTC_2018_SZ_FinalBot_Manual extends OpMode{
         double g2leftStickY = -gamepad2.left_stick_y;
         double g2rightStickX = gamepad2.right_stick_x;
         double g2rightStickY = -gamepad2.right_stick_y;
-        
+
         telemetry.addData("Power",robot.lifting.getPower());
 
         if (gamepad2.right_bumper) {//close

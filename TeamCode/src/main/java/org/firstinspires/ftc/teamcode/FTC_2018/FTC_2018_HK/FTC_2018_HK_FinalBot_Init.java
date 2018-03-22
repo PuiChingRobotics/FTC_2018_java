@@ -111,11 +111,6 @@ public class FTC_2018_HK_FinalBot_Init {
         Rback.setDirection(DcMotorSimple.Direction.REVERSE);
         Lrope.setDirection(DcMotorSimple.Direction.REVERSE);
         Rroll.setDirection(DcMotorSimple.Direction.REVERSE);
-
-        Lfront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        Lback.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        Rfront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        Rback.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
     public void runModeSet(String mode) {

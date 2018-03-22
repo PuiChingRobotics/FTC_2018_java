@@ -58,7 +58,6 @@ public class FTC_2018_HK_FinalBot_Manual extends OpMode{
             robot.unusedL.setPosition(0);
             robot.unusedR.setPosition(1);
         }
-
         if (gamepad1.x) {//open
             robot.unusedL.setPosition(0.2);
             robot.unusedR.setPosition(0.4);
@@ -69,7 +68,6 @@ public class FTC_2018_HK_FinalBot_Manual extends OpMode{
             robot.unusedR.setPosition(1);
 
         }
-
         if (gamepad1.dpad_up == true) {
             robot.Lrope.setPower(1);
             robot.Rrope.setPower(-0.2);
@@ -82,7 +80,6 @@ public class FTC_2018_HK_FinalBot_Manual extends OpMode{
             if (gamepad1.left_trigger != 0) robot.Lrope.setPower(-0.7);              //down  //back motor
             else if (gamepad1.right_trigger != 0) robot.Lrope.setPower(0.7);         //up     //back motor
             else robot.Lrope.setPower(0);
-
             if (gamepad1.left_bumper == true) robot.Rrope.setPower(-0.7);          //down  //front motor
             else if (gamepad1.right_bumper == true) robot.Rrope.setPower(0.7);   //up    //front motor
             else robot.Rrope.setPower(0);
@@ -90,7 +87,6 @@ public class FTC_2018_HK_FinalBot_Manual extends OpMode{
     }*/
 
     /*public void Glyph_RobotIn30Hours() {//not used
-
         if (gamepad2.a) {//open
             robot.unusedL.setPosition(0.6);//1
             robot.unusedR.setPosition(0.4);//0
@@ -107,7 +103,6 @@ public class FTC_2018_HK_FinalBot_Manual extends OpMode{
             robot.unusedL.setPosition(1);
             robot.unusedR.setPosition(0);
         }
-
         if (gamepad2.dpad_up) {//lifting up
             robot.Lrope.setPower(-0.5);
             robot.Rrope.setPower(-0.5);
@@ -189,7 +184,6 @@ public class FTC_2018_HK_FinalBot_Manual extends OpMode{
             robot.unusedL.setPosition(1);
             robot.unusedR.setPosition(0);
         }
-
         robot.Lrope.setPower(-gamepad2.left_stick_y);
         robot.Rrope.setPower(-gamepad2.right_stick_y);
     }*/
@@ -209,9 +203,7 @@ public class FTC_2018_HK_FinalBot_Manual extends OpMode{
         if (gamepad2.left_bumper) {//close
             robot.unusedClip.setPosition(0.6);
         }
-
         robot.rope.setPower(g2leftStickY);
-
         if (gamepad2.right_trigger > 0) {
             robot.lifting.setPower(0.1);
         } else if (gamepad2.left_trigger > 0) {
@@ -233,7 +225,6 @@ public class FTC_2018_HK_FinalBot_Manual extends OpMode{
         double g2rightStickY = -gamepad2.right_stick_y;
 
         telemetry.addData("Power",robot.lifting.getPower());
-
         if (gamepad2.right_bumper) {//close
             robot.unusedClip.setPosition(0.8);
         }
@@ -274,8 +265,8 @@ public class FTC_2018_HK_FinalBot_Manual extends OpMode{
         double g2rightStickX = gamepad2.right_stick_x;
         double g2rightStickY = -gamepad2.right_stick_y;
 
-        double speed_new = 1-0.7;
-        double speed_old = 0.7;
+        double speed_new = 0.2;
+        double speed_old = 0.8;
 
         telemetry.addData("Running", "Robot 1");
         //player1
@@ -286,10 +277,10 @@ public class FTC_2018_HK_FinalBot_Manual extends OpMode{
         robot.Lbackforward = RoundDownDp(robot.Lbackforward*speed_old+leftStickY*speed_new, 0.001);
         robot.Rbackforward = RoundDownDp(robot.Rbackforward*speed_old+leftStickY*speed_new, 0.001);
 
-        robot.Lfronttmp = RoundDownDp(leftStickY*1+rightStickX*1, 0.001);
-        robot.Rfronttmp = RoundDownDp(leftStickY*1-rightStickX*1, 0.001);
-        robot.Lbacktmp = RoundDownDp(leftStickY*1+rightStickX*1, 0.001);
-        robot.Rbacktmp = RoundDownDp(leftStickY*1-rightStickX*1, 0.001);
+        robot.Lfronttmp = RoundDownDp(robot.Lfrontforward*0.7+rightStickX*0.7, 0.001);
+        robot.Rfronttmp = RoundDownDp(robot.Rfrontforward*0.7-rightStickX*0.7, 0.001);
+        robot.Lbacktmp = RoundDownDp(robot.Lbackforward*0.7+rightStickX*0.7, 0.001);
+        robot.Rbacktmp = RoundDownDp(robot.Rbackforward*0.7-rightStickX*0.7, 0.001);
 
         robot.Lfront.setPower(robot.Lfronttmp);
         robot.Lback.setPower(robot.Lbacktmp);
@@ -350,7 +341,6 @@ public class FTC_2018_HK_FinalBot_Manual extends OpMode{
             robot.Rfront.setPower(-0.3);
             robot.Rback.setPower(-0.3);
         }
-        //write something to push
         //Player1
         //Glyph_DoubleClip();
         //Relic_Arm();

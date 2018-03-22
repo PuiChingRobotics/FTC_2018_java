@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.LightSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-public class FTC_2018_SZ_FinalBot_Init {
+public class FTC_2018_SZ_Robot1_Init {
 
     public Servo clipL;
     public Servo clipR;
