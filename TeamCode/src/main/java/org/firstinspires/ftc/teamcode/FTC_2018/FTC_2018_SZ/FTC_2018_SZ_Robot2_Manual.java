@@ -3,10 +3,10 @@ package org.firstinspires.ftc.teamcode.FTC_2018.FTC_2018_SZ;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name="FTC_2018_SZ_Robot1_Manual", group="FTC 2018")
+@TeleOp(name="FTC_2018_SZ_Robot2_Manual", group="FTC 2018")
 public class FTC_2018_SZ_Robot2_Manual extends OpMode{
 
-    FTC_2018_SZ_Robot1_Init robot = new FTC_2018_SZ_Robot1_Init();
+    FTC_2018_SZ_Robot2_Init robot = new FTC_2018_SZ_Robot2_Init();
 
     @Override
     public void init(){
@@ -20,19 +20,12 @@ public class FTC_2018_SZ_Robot2_Manual extends OpMode{
         robot.Rrope.setPower(0);
 
         robot.clipL.setPosition(0.2);
-        robot.clipR.setPosition(0.8);
+        robot.clipR.setPosition(0.8);*/
 
         //Blue L
-        robot.ColourSensorBlue1.enableLed(true);
-        robot.ColourSensorBlue2.enableLed(true);
-        robot.ArmBaseBlue.setPosition(robot.ArmBaseCentreBlue);
-        robot.ArmTopBlue.setPosition(robot.ArmTopCloseBlue);
-
-        //Red R
-        robot.ColourSensorRed1.enableLed(true);
-        robot.ColourSensorRed2.enableLed(true);
-        robot.ArmBaseRed.setPosition(robot.ArmBaseCentreRed);
-        robot.ArmTopRed.setPosition(robot.ArmTopCloseRed);*/
+        robot.ColourSensor0.enableLed(true);
+        robot.ArmBase.setPosition(robot.ArmBaseCentre);
+        robot.ArmTop.setPosition(robot.ArmTopClose);
     }
 
 
@@ -46,81 +39,7 @@ public class FTC_2018_SZ_Robot2_Manual extends OpMode{
 
     }
 
-    /*public void Glyph_DoubleClip(){//not used
-        //Glyph Clip
-        if (gamepad1.a) {//open
-            robot.unusedL.setPosition(0.5);
-            robot.unusedR.setPosition(0.5);
-        }
-        if (gamepad1.b) {//close
-            robot.unusedL.setPosition(0);
-            robot.unusedR.setPosition(1);
-        }
-
-        if (gamepad1.x) {//open
-            robot.unusedL.setPosition(0.2);
-            robot.unusedR.setPosition(0.4);
-        	
-        }
-        if (gamepad1.y) {//close
-            robot.unusedL.setPosition(0.8);
-            robot.unusedR.setPosition(1);
-        	
-        }
-
-        if (gamepad1.dpad_up == true) {
-            robot.Lrope.setPower(1);
-            robot.Rrope.setPower(-0.2);
-        }
-        else if (gamepad1.dpad_down == true) {
-            robot.Lrope.setPower(-1);
-            robot.Rrope.setPower(0.8);
-        }
-        else {
-            if (gamepad1.left_trigger != 0) robot.Lrope.setPower(-0.7);              //down  //back motor
-            else if (gamepad1.right_trigger != 0) robot.Lrope.setPower(0.7);         //up     //back motor
-            else robot.Lrope.setPower(0);
-
-            if (gamepad1.left_bumper == true) robot.Rrope.setPower(-0.7);          //down  //front motor
-            else if (gamepad1.right_bumper == true) robot.Rrope.setPower(0.7);   //up    //front motor
-            else robot.Rrope.setPower(0);
-        }
-    }*/
-
-    /*public void Glyph_RobotIn30Hours() {//not used
-
-        if (gamepad2.a) {//open
-            robot.unusedL.setPosition(0.6);//1
-            robot.unusedR.setPosition(0.4);//0
-        }
-        else if (gamepad2.b) {//close
-            robot.unusedL.setPosition(0);//0.1
-            robot.unusedR.setPosition(1);//0.9
-        }
-        else if (gamepad2.x) {//half-open
-            robot.unusedL.setPosition(0.2);//0.2
-            robot.unusedR.setPosition(0.8);//0.8
-        }
-        else if (gamepad2.y) {//fully-close
-            robot.unusedL.setPosition(1);
-            robot.unusedR.setPosition(0);
-        }
-
-        if (gamepad2.dpad_up) {//lifting up
-            robot.Lrope.setPower(-0.5);
-            robot.Rrope.setPower(-0.5);
-        }
-        else if (gamepad2.dpad_down) {//lifting down
-            robot.Lrope.setPower(0.5);
-            robot.Rrope.setPower(0.5);
-        }
-        else {
-            robot.Lrope.setPower(0);
-            robot.Rrope.setPower(0);
-        }
-    }*/
-
-    public void Glyph_Roll() {//Current using
+    /*public void Glyph_Roll() {//Current using
         double leftStickX = gamepad1.left_stick_x;
         double leftStickY = -gamepad1.left_stick_y;
         double rightStickX = gamepad1.right_stick_x;
@@ -172,86 +91,6 @@ public class FTC_2018_SZ_Robot2_Manual extends OpMode{
             robot.Lrope.setPower(-g2rightStickY);
             robot.Rrope.setPower(-g2rightStickY);
         }
-    }
-
-    /*public void Relic_Ruler() {//not used
-        if (gamepad2.a) {//close
-            robot.unusedL.setPosition(0);
-            robot.unusedR.setPosition(0);
-        }
-        else if (gamepad2.b) {//open
-            robot.unusedL.setPosition(0);
-            robot.unusedR.setPosition(0);
-        }
-        else if (gamepad2.x) {//fully open
-            robot.unusedL.setPosition(1);
-            robot.unusedR.setPosition(0);
-        }
-
-        robot.Lrope.setPower(-gamepad2.left_stick_y);
-        robot.Rrope.setPower(-gamepad2.right_stick_y);
-    }*/
-
-    /*public void Relic_Arm() {//not used
-        double leftStickX = gamepad1.left_stick_x;
-        double leftStickY = -gamepad1.left_stick_y;
-        double rightStickX = gamepad1.right_stick_x;
-        double rightStickY = -gamepad1.right_stick_y;
-        double g2leftStickX = gamepad2.left_stick_x;
-        double g2leftStickY = -gamepad2.left_stick_y;
-        double g2rightStickX = gamepad2.right_stick_x;
-        double g2rightStickY = -gamepad2.right_stick_y;
-        if (gamepad2.right_bumper) {//open
-            robot.unusedClip.setPosition(1);
-        }
-        if (gamepad2.left_bumper) {//close
-            robot.unusedClip.setPosition(0.6);
-        }
-
-        robot.rope.setPower(g2leftStickY);
-
-        if (gamepad2.right_trigger > 0) {
-            robot.lifting.setPower(0.1);
-        } else if (gamepad2.left_trigger > 0) {
-            robot.lifting.setPower(-0.05);
-        }
-        else {
-            robot.lifting.setPower(g2rightStickY*0.35);
-        }
-    }*/
-
-    /*public void Relic_Z() {//not used
-        double leftStickX = gamepad1.left_stick_x;
-        double leftStickY = -gamepad1.left_stick_y;
-        double rightStickX = gamepad1.right_stick_x;
-        double rightStickY = -gamepad1.right_stick_y;
-        double g2leftStickX = gamepad2.left_stick_x;
-        double g2leftStickY = -gamepad2.left_stick_y;
-        double g2rightStickX = gamepad2.right_stick_x;
-        double g2rightStickY = -gamepad2.right_stick_y;
-        
-        telemetry.addData("Power",robot.lifting.getPower());
-
-        if (gamepad2.right_bumper) {//close
-            robot.unusedClip.setPosition(0.8);
-        }
-        if (gamepad2.left_bumper) {//open
-            robot.unusedClip.setPosition(0.2);
-        }
-        robot.lifting.setPower(g2rightStickY*0.8);
-        if (gamepad1.dpad_up) {
-            robot.rope.setPower(0.3);
-        }
-        else if (gamepad1.dpad_right) {
-            robot.rope.setPower(0.1);
-        }
-        else if (gamepad1.dpad_down) {
-            robot.rope.setPower(-0.3);
-        }
-        else if (gamepad1.dpad_left) {
-            robot.rope.setPower(-0.1);
-        }
-        else robot.rope.setPower(g2leftStickY*0.3);
     }*/
 
     public double RoundDownDp(double value, double place){
@@ -294,7 +133,7 @@ public class FTC_2018_SZ_Robot2_Manual extends OpMode{
         robot.Rfront.setPower(robot.Rfronttmp);
         robot.Rback.setPower(robot.Rbacktmp);
 
-        /*telemetry.addData("gamepad1", !gamepad1.atRest());
+        telemetry.addData("gamepad1", !gamepad1.atRest());
         telemetry.addData("leftStickX", leftStickX);
         telemetry.addData("leftStickY", leftStickY);
         telemetry.addData("rightStickX", rightStickX);
@@ -310,34 +149,20 @@ public class FTC_2018_SZ_Robot2_Manual extends OpMode{
         telemetry.addData("Lbacktmp", robot.Lbacktmp);
         telemetry.addData("Rbacktmp", robot.Rbacktmp);
 
-        telemetry.addData("SensorBlue1", robot.ColourSensorBlue1.getLightDetected());
-        telemetry.addData("SensorBlue2", robot.ColourSensorBlue2.getLightDetected());
-        telemetry.addData("ArmBaseBlue", robot.ArmBaseBlue.getPosition());
-        telemetry.addData("ArmTopBlue", robot.ArmTopBlue.getPosition());
-
-        telemetry.addData("SensorRed1", robot.ColourSensorRed1.getLightDetected());
-        telemetry.addData("SensorRed2", robot.ColourSensorRed2.getLightDetected());
-        telemetry.addData("ArmBaseRed", robot.ArmBaseRed.getPosition());
-        telemetry.addData("ArmTopRed", robot.ArmTopRed.getPosition());
+        telemetry.addData("SensorArgb", robot.ColourSensor0.argb());
+        telemetry.addData("SensorBlue", robot.ColourSensor0.blue());
+        telemetry.addData("SensorRed", robot.ColourSensor0.red());
+        telemetry.addData("ArmBaseRed", robot.ArmBase.getPosition());
+        telemetry.addData("ArmTopRed", robot.ArmTop.getPosition());
 
         if (gamepad1.a) {
-            //Blue L
-            robot.ArmBaseBlue.setPosition(robot.ArmBaseCentreBlue);
-            robot.ArmTopBlue.setPosition(robot.ArmTopCloseBlue);
-
-            //Red R
-            robot.ArmBaseRed.setPosition(robot.ArmBaseCentreRed);
-            robot.ArmTopRed.setPosition(robot.ArmTopCloseRed);
+            robot.ArmBase.setPosition(robot.ArmBaseCentre);
+            robot.ArmTop.setPosition(robot.ArmTopClose);
         }
         else if (gamepad1.b) {
-            //Blue L
-            //robot.ArmBaseBlue.setPosition(robot.ArmBaseForwardBlue);
-            robot.ArmTopBlue.setPosition(robot.ArmTopOpen2Blue);
-
-            //Red R
-            //robot.ArmBaseRed.setPosition(robot.ArmBaseForwardRed);
-            robot.ArmTopRed.setPosition(robot.ArmTopOpen2Red);
-        }*/
+            robot.ArmBase.setPosition(robot.ArmBaseForward);
+            robot.ArmTop.setPosition(robot.ArmTopOpenUpper);
+        }
 
         if (gamepad1.right_trigger > 0) {
             robot.Lfront.setPower(0.3);
