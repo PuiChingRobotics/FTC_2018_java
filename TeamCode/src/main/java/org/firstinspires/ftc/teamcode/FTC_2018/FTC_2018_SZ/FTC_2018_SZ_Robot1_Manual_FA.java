@@ -8,7 +8,6 @@ public class FTC_2018_SZ_Robot1_Manual_FA extends OpMode{
 
     FTC_2018_SZ_Robot1_Init robot = new FTC_2018_SZ_Robot1_Init();
 
-
     @Override
     public void init(){
         robot.init(hardwareMap);
