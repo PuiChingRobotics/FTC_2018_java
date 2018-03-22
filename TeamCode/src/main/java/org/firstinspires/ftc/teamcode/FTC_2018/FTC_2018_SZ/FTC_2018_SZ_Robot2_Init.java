@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 
 public class FTC_2018_SZ_Robot2_Init {
-
+//yu
     public Servo clipL;
     public Servo clipR;
 

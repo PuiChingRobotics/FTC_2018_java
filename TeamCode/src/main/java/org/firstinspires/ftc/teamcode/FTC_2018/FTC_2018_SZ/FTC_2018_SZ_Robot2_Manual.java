@@ -15,7 +15,7 @@ public class FTC_2018_SZ_Robot2_Manual extends OpMode{
         robot.Rfront.setPower(0);
         robot.Lback.setPower(0);
         robot.Rback.setPower(0);
-
+//ghh
         /*robot.Lrope.setPower(0);
         robot.Rrope.setPower(0);
 
