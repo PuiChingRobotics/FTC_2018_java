@@ -10,49 +10,54 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class FTC_2018_SZ_Robot2_Init {
 
-    /*public Servo clipL;
-    public Servo clipR;*/
 
+    public Servo ArmR;
+    public Servo ArmL;
+    public LightSensor ColorUpperL;
+    public LightSensor ColorLowerL;
+    public LightSensor ColorUpperR;
+    public LightSensor ColorLowerR;
 
-    public Servo unusedL;
-    public Servo unusedR;
-    public Servo unusedClip;
-
-    public Servo ArmBase;
-    public Servo ArmTop;
-
-    public ColorSensor ColourSensor0;
-
-    public DcMotor rope;
+    public DcMotor plate;
     public DcMotor lifting;
 
-    /*public DcMotor Lrope;
-    public DcMotor Rrope;
-
     public DcMotor Lroll;
-    public DcMotor Rroll;*/
+    public DcMotor Rroll;
 
     public DcMotor Lfront;
     public DcMotor Rfront;
     public DcMotor Lback;
     public DcMotor Rback;
 
+    public Servo GolfL;
+    public Servo GolfR;
+    public Servo Clip1;
+    public Servo Clip2;
+
     public final double clipDown = 0;   //continuous servo value
     public final double clipUp = 1;     //continuous servo value
     public final double clipStop = 0.5;//continuous servo value
 
     //Auto
-    public final double ArmBaseBackward = 0.8;
-    public final double ArmBaseCentre = 0.5;
-    public final double ArmBaseForward = 0.2;
-    public final double ArmTopOpenUpper = 0.9;
-    public final double ArmTopOpenLower = 0.92;
-    public final double ArmTopClose = 0.2;
+    public final double ArmLOpen = 1;
+    public final double ArmLClose = 0.4;
+    public final double ArmROpen = 0;
+    public final double ArmRClose = 0.6;
 
     public final double JewelBlueUpper = 0.25;
     public final double JewelBlueLower = 0.1;
     public final double JewelRedUpper = 0.5;
     public final double JewelRedLower = 0.27;
+
+    public final double GolfLOpen = 1;
+    public final double GolfROpen = 0;
+    public final double GolfLClose = 0;
+    public final double GolfRClose = 1;
+
+    public final double Clip1Open = 0.5;
+    public final double Clip1Close = 0.25;
+    public final double Clip2Open = 0.5;
+    public final double Clip2Close = 0.25;
 
     //Drive
     public double Lfronttmp = 0;
@@ -65,8 +70,14 @@ public class FTC_2018_SZ_Robot2_Init {
     public double Rfrontforward = 0;
     public double Rbackforward = 0;
 
-    //Roll
-    public double Rolltmp = 0;
+    public int plate_encoder = -3750;
+    public int lifting_encoder = 3400;
+    public boolean plate_is_flip = false;
+
+    public boolean toggle_Golf = false;
+    public boolean state_Golf = false;
+    public boolean toggle_Clip = false;
+    public boolean state_Clip = false;
 
 
     public HardwareMap _hw;
@@ -74,29 +85,34 @@ public class FTC_2018_SZ_Robot2_Init {
     public void init(HardwareMap hw){
         _hw = hw;
 
-        /*clipL = _hw.servo.get("clipL");
-        clipR = _hw.servo.get("clipR");*/
+        ArmL = _hw.servo.get("ArmL");
+        ArmR = _hw.servo.get("ArmR");
 
-        ArmBase = _hw.servo.get("ArmBase");
-        ArmTop = _hw.servo.get("ArmTop");
-
-        /*Lrope = _hw.dcMotor.get("Lrope");
-        Rrope = _hw.dcMotor.get("Rrope");
+        plate = _hw.dcMotor.get("plate");
+        lifting = _hw.dcMotor.get("lifting");
 
         Lroll = _hw.dcMotor.get("Lroll");
-        Rroll = _hw.dcMotor.get("Rroll");*/
+        Rroll = _hw.dcMotor.get("Rroll");
 
         Lfront = _hw.dcMotor.get("Lfront");
         Rfront = _hw.dcMotor.get("Rfront");
         Lback = _hw.dcMotor.get("Lback");
         Rback = _hw.dcMotor.get("Rback");
 
-        ColourSensor0 = _hw.colorSensor.get("ColourSensor0");
+        GolfL = _hw.servo.get("GolfL");
+        GolfR = _hw.servo.get("GolfR");
+
+        Clip1 = _hw.servo.get("Clip1");
+        Clip2 = _hw.servo.get("Clip2");
+
+        ColorUpperL = _hw.lightSensor.get("ColorUpperL");
+        ColorLowerL = _hw.lightSensor.get("ColorLowerL");
+        ColorUpperR = _hw.lightSensor.get("ColorUpperR");
+        ColorLowerR = _hw.lightSensor.get("ColorLowerR");
 
         Rfront.setDirection(DcMotorSimple.Direction.REVERSE);
         Rback.setDirection(DcMotorSimple.Direction.REVERSE);
-        /*Lrope.setDirection(DcMotorSimple.Direction.REVERSE);
-        Rroll.setDirection(DcMotorSimple.Direction.REVERSE);*/
+        Rroll.setDirection(DcMotorSimple.Direction.REVERSE);
 
         Lfront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         Lback.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -111,11 +127,19 @@ public class FTC_2018_SZ_Robot2_Init {
             Rfront.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             Rback.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         }
+        else if (mode == "position2") {
+            plate.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            lifting.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        }
         else if (mode == "reset") {
             Lfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             Lback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             Rfront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             Rback.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        }
+        else if (mode == "reset2") {
+            plate.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            lifting.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         }
         else if (mode == "tele") {
             Lfront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -128,6 +152,12 @@ public class FTC_2018_SZ_Robot2_Init {
             Lback.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             Rfront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             Rback.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            Lroll.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            Rroll.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        }
+        else if (mode == "encoder2") {
+            plate.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            lifting.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
     }
 }

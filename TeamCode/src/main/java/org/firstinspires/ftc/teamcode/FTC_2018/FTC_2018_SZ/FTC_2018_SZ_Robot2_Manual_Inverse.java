@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@TeleOp(name="FTC_2018_SZ_Robot2_Manual", group="FTC 2018")
-public class FTC_2018_SZ_Robot2_Manual extends OpMode{
+@TeleOp(name="FTC_2018_SZ_Robot2_Manual_Inverse", group="FTC 2018")
+public class FTC_2018_SZ_Robot2_Manual_Inverse extends OpMode{
 
     FTC_2018_SZ_Robot2_Init robot = new FTC_2018_SZ_Robot2_Init();
 
@@ -99,7 +99,7 @@ public class FTC_2018_SZ_Robot2_Manual extends OpMode{
             robot.lifting.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.lifting.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            robot.lifting.setTargetPosition(robot.lifting_encoder);
+            robot.lifting.setTargetPosition(-robot.lifting_encoder);
             robot.lifting.setPower(1);
         }
         else if (gamepad2.dpad_down) {
@@ -122,7 +122,7 @@ public class FTC_2018_SZ_Robot2_Manual extends OpMode{
             robot.plate.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.plate.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            robot.plate.setTargetPosition(robot.plate_encoder);
+            robot.plate.setTargetPosition(-robot.plate_encoder);
             robot.plate.setPower(1);
         }
         else if (gamepad2.left_bumper) {
